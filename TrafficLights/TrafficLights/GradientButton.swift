@@ -9,6 +9,7 @@ import UIKit
 @IBDesignable class GradientButton: UIButton {
     
     // MARK: - Public vars
+    // TODO: implement `didSet`s and call `setNeedsDisplay()` or `setNeedsLayout()`
     @IBInspectable var startColor: UIColor = .white
     @IBInspectable var endColor: UIColor = .white
     @IBInspectable var cornerRadius = CGFloat(5.0)
@@ -43,5 +44,10 @@ import UIKit
         layer.cornerRadius = cornerRadius
         layer.borderWidth = borderWidth
         layer.borderColor = borderColor.cgColor
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        // setNeedsDisplay()
+        setNeedsLayout()
     }
 }

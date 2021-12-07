@@ -11,7 +11,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // Switched the whole app to dark mode using UIUserInterfaceStyle option in Info.plist
+        //overrideUserInterfaceStyle = .dark
     }
 
 
