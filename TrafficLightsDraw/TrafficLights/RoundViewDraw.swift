@@ -62,14 +62,14 @@ class RoundViewDraw: UIView
     
     override func draw(_ rect: CGRect) {
         borderColor.set()
-        pathForSkull().stroke()
+        pathForCircle().stroke()
         color.set()
-        pathForSkull().fill()
+        pathForCircle().fill()
     }
     
     // MARK: - Private functions
     
-    private func pathForSkull() -> UIBezierPath {
+    private func pathForCircle() -> UIBezierPath {
         let path = UIBezierPath(arcCenter: circleCenter, radius: circleRadius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
         path.lineWidth = lineWidth
         return path
