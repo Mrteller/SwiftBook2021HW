@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class TrafficLightsController: UIViewController {
 
@@ -19,6 +20,10 @@ class TrafficLightsController: UIViewController {
             let animation = UIViewPropertyAnimator(duration: 2, dampingRatio: 0.5) { [unowned self] in
                 lights.forEach{ $0.alpha = 0.3 }
                 lights.first(where: { $0.tag == trafficLight.rawValue })?.alpha = 1
+            }
+            
+            animation.addCompletion { _ in
+                AudioServicesPlaySystemSound (1013)
             }
             animation.startAnimation()
             switch trafficLight {
@@ -40,8 +45,15 @@ class TrafficLightsController: UIViewController {
 
     // MARK: - @IBActions
     @IBAction func switchLightButtonTapped() {
-        switchLightButton.setTitle("Next", for: .normal)
+        switchLightButton.setAttributedTitle(attribString(from: "Next"), for: .normal)
         trafficLight.toggleNext()
+    }
+    
+    // MARK: - Private funcs
+    private func attribString(from string: String) -> NSAttributedString {
+        return NSAttributedString(
+            string: string,
+            attributes: [.font: UIFont.systemFont(ofSize: 50)])
     }
 }
 

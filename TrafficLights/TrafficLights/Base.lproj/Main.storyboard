@@ -74,10 +74,10 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwh-aP-nI0" customClass="GradientButton" customModule="TrafficLights" customModuleProvider="target">
-                                <rect key="frame" x="30" y="784.5" width="354" height="47.5"/>
+                                <rect key="frame" x="30" y="758" width="354" height="74"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Start">
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="28"/>
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="50"/>
                                 </buttonConfiguration>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="startColor">
@@ -122,7 +122,7 @@
     </scenes>
     <designables>
         <designable name="hwh-aP-nI0">
-            <size key="intrinsicContentSize" width="82" height="47.5"/>
+            <size key="intrinsicContentSize" width="126" height="74"/>
         </designable>
     </designables>
     <resources>
