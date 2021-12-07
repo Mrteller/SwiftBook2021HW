@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		DAAFE24C275F602400D35C9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFE24B275F602400D35C9A /* AppDelegate.swift */; };
 		DAAFE24E275F602400D35C9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFE24D275F602400D35C9A /* SceneDelegate.swift */; };
-		DAAFE250275F602400D35C9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFE24F275F602400D35C9A /* ViewController.swift */; };
+		DAAFE250275F602400D35C9A /* TrafficLightsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAFE24F275F602400D35C9A /* TrafficLightsController.swift */; };
 		DAAFE253275F602400D35C9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAAFE251275F602400D35C9A /* Main.storyboard */; };
 		DAAFE255275F602700D35C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAAFE254275F602700D35C9A /* Assets.xcassets */; };
 		DAAFE258275F602700D35C9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAAFE256275F602700D35C9A /* LaunchScreen.storyboard */; };
@@ -21,7 +21,7 @@
 		DAAFE248275F602400D35C9A /* TrafficLights.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrafficLights.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAAFE24B275F602400D35C9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAAFE24D275F602400D35C9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DAAFE24F275F602400D35C9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DAAFE24F275F602400D35C9A /* TrafficLightsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficLightsController.swift; sourceTree = "<group>"; };
 		DAAFE252275F602400D35C9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DAAFE254275F602700D35C9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DAAFE257275F602700D35C9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 			children = (
 				DAAFE24B275F602400D35C9A /* AppDelegate.swift */,
 				DAAFE24D275F602400D35C9A /* SceneDelegate.swift */,
-				DAAFE24F275F602400D35C9A /* ViewController.swift */,
+				DAAFE24F275F602400D35C9A /* TrafficLightsController.swift */,
 				DAAFE25F275F63EE00D35C9A /* GradientButton.swift */,
 				DAAFE261275F6A8300D35C9A /* RoundView.swift */,
 				DAAFE251275F602400D35C9A /* Main.storyboard */,
@@ -144,7 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAAFE250275F602400D35C9A /* ViewController.swift in Sources */,
+				DAAFE250275F602400D35C9A /* TrafficLightsController.swift in Sources */,
 				DAAFE260275F63EE00D35C9A /* GradientButton.swift in Sources */,
 				DAAFE24C275F602400D35C9A /* AppDelegate.swift in Sources */,
 				DAAFE24E275F602400D35C9A /* SceneDelegate.swift in Sources */,
