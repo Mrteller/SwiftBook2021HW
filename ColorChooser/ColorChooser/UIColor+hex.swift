@@ -65,5 +65,19 @@ extension UIColor {
         }
     }
 
+    static func rgbToHex(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat = 1, alpha: Bool = false) -> String? {
+        
+        let red = round(r.clamp(lowerBound: 0, upperBound: 1) * 255)
+        let green = round(g.clamp(lowerBound: 0, upperBound: 1) * 255)
+        let blue = round(b.clamp(lowerBound: 0, upperBound: 1) * 255)
+        let al = round(a.clamp(lowerBound: 0, upperBound: 1) * 255)
+        print("R:\(r) G:\(g) B:\(b)")
+
+        if alpha {
+            return String(format: "%02lX%02lX%02lX%02lX", Int(red), Int(green), Int(blue), Int(al))
+        } else {
+            return String(format: "%02lX%02lX%02lX", Int(red), Int(green), Int(blue))
+        }
+    }
 }
 

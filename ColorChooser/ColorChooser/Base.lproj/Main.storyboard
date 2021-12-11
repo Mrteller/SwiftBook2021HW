@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Color Chooser View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ColorChooser" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ColorChooserViewController" customModule="ColorChooser" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,7 +37,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qDf-e7-qJb">
-                                <rect key="frame" x="36" y="344" width="342" height="502"/>
+                                <rect key="frame" x="36" y="114" width="342" height="732"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbc-yP-Tqr">
                                         <rect key="frame" x="0.0" y="0.0" width="342" height="128"/>
@@ -53,19 +53,19 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="807F7F" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CBv-7e-d3y">
-                                        <rect key="frame" x="0.0" y="136" width="342" height="45.5"/>
+                                        <rect key="frame" x="0.0" y="136" width="342" height="153.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                     </textField>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NB4-gE-AcV">
-                                        <rect key="frame" x="0.0" y="189.5" width="342" height="32"/>
+                                        <rect key="frame" x="0.0" y="297.5" width="342" height="154"/>
                                         <segments>
                                             <segment title="RGB"/>
                                             <segment title="HSB"/>
                                         </segments>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cOQ-RP-ABA">
-                                        <rect key="frame" x="0.0" y="228.5" width="342" height="273.5"/>
+                                        <rect key="frame" x="0.0" y="458.5" width="342" height="273.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="D1c-z9-fqW" userLabel="RGB Stack View">
                                                 <rect key="frame" x="0.0" y="0.0" width="342" height="106"/>
@@ -159,6 +159,9 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="CBv-7e-d3y" firstAttribute="height" secondItem="NB4-gE-AcV" secondAttribute="height" id="joS-vq-JN8"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -166,19 +169,23 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="qDf-e7-qJb" secondAttribute="trailing" constant="16" id="62D-7W-SYG"/>
                             <constraint firstItem="qDf-e7-qJb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="9kS-lI-MzJ"/>
-                            <constraint firstItem="qDf-e7-qJb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" priority="750" constant="300" id="Anu-AN-K4R"/>
+                            <constraint firstItem="qDf-e7-qJb" firstAttribute="top" secondItem="Xy0-rN-OPI" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="Anu-AN-K4R"/>
                             <constraint firstItem="qDf-e7-qJb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="BHY-cG-vmr"/>
                             <constraint firstItem="Xy0-rN-OPI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="CLc-cQ-f6m"/>
                             <constraint firstItem="Xy0-rN-OPI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="14" id="Fmx-iQ-jXD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qDf-e7-qJb" secondAttribute="bottom" constant="16" id="e6O-jU-sfL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="u9d-A8-ed0" secondAttribute="trailing" constant="36" id="Uwt-Yf-frP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qDf-e7-qJb" secondAttribute="bottom" priority="250" constant="16" id="e6O-jU-sfL"/>
                             <constraint firstItem="Xy0-rN-OPI" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="i5g-4k-p8x"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="blueSlider" destination="u9d-A8-ed0" id="uB5-rG-GG2"/>
                         <outlet property="blueValueLabel" destination="Tz6-bB-dH5" id="Zey-OK-rEi"/>
                         <outlet property="colorDisplay" destination="bbc-yP-Tqr" id="C4f-D1-0DW"/>
+                        <outlet property="greenSlider" destination="Np7-eR-vyg" id="Nue-tn-0D3"/>
                         <outlet property="greenValueLabel" destination="5H0-1H-Ofu" id="sUo-CX-sB1"/>
                         <outlet property="hexTextField" destination="CBv-7e-d3y" id="S8w-A5-fUJ"/>
+                        <outlet property="redSlider" destination="wEj-3l-mJZ" id="ejx-Qv-g9d"/>
                         <outlet property="redValueLabel" destination="ra3-HC-FZL" id="25l-rB-X30"/>
                         <outlet property="segmentedControl" destination="NB4-gE-AcV" id="wPc-Nk-ViC"/>
                     </connections>
