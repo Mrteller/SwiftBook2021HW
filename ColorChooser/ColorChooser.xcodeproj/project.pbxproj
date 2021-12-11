@@ -16,6 +16,7 @@
 		DA8C4BB627635D4C00AF5C55 /* GradientTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C4BB527635D4B00AF5C55 /* GradientTextLabel.swift */; };
 		DAECE9452763C28200EB9DFE /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECE9442763C28200EB9DFE /* UIColor+hex.swift */; };
 		DAECE9472763D90200EB9DFE /* UIView+Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECE9462763D90200EB9DFE /* UIView+Shimmering.swift */; };
+		DAECE949276505B700EB9DFE /* Comparable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECE948276505B700EB9DFE /* Comparable+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		DA8C4BB527635D4B00AF5C55 /* GradientTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientTextLabel.swift; sourceTree = "<group>"; };
 		DAECE9442763C28200EB9DFE /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
 		DAECE9462763D90200EB9DFE /* UIView+Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmering.swift"; sourceTree = "<group>"; };
+		DAECE948276505B700EB9DFE /* Comparable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				DA8C4BB527635D4B00AF5C55 /* GradientTextLabel.swift */,
 				DA8C4BA527633B6000AF5C55 /* Main.storyboard */,
 				DAECE9442763C28200EB9DFE /* UIColor+hex.swift */,
+				DAECE948276505B700EB9DFE /* Comparable+.swift */,
 				DAECE9462763D90200EB9DFE /* UIView+Shimmering.swift */,
 				DA8C4BA827633B6400AF5C55 /* Assets.xcassets */,
 				DA8C4BAA27633B6400AF5C55 /* LaunchScreen.storyboard */,
@@ -147,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAECE949276505B700EB9DFE /* Comparable+.swift in Sources */,
 				DAECE9452763C28200EB9DFE /* UIColor+hex.swift in Sources */,
 				DA8C4BA427633B6000AF5C55 /* ColorChooserViewController.swift in Sources */,
 				DA8C4BB627635D4C00AF5C55 /* GradientTextLabel.swift in Sources */,
