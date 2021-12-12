@@ -13,7 +13,6 @@
 		DA8C4BA727633B6000AF5C55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8C4BA527633B6000AF5C55 /* Main.storyboard */; };
 		DA8C4BA927633B6400AF5C55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA8C4BA827633B6400AF5C55 /* Assets.xcassets */; };
 		DA8C4BAC27633B6400AF5C55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8C4BAA27633B6400AF5C55 /* LaunchScreen.storyboard */; };
-		DA8C4BB627635D4C00AF5C55 /* GradientTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C4BB527635D4B00AF5C55 /* GradientTextLabel.swift */; };
 		DAECE9452763C28200EB9DFE /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECE9442763C28200EB9DFE /* UIColor+hex.swift */; };
 		DAECE9472763D90200EB9DFE /* UIView+Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECE9462763D90200EB9DFE /* UIView+Shimmering.swift */; };
 		DAECE949276505B700EB9DFE /* Comparable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECE948276505B700EB9DFE /* Comparable+.swift */; };
@@ -29,7 +28,6 @@
 		DA8C4BA827633B6400AF5C55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA8C4BAB27633B6400AF5C55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA8C4BAD27633B6400AF5C55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DA8C4BB527635D4B00AF5C55 /* GradientTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientTextLabel.swift; sourceTree = "<group>"; };
 		DAECE9442763C28200EB9DFE /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
 		DAECE9462763D90200EB9DFE /* UIView+Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmering.swift"; sourceTree = "<group>"; };
 		DAECE948276505B700EB9DFE /* Comparable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+.swift"; sourceTree = "<group>"; };
@@ -69,12 +67,11 @@
 				DA8C4B9F27633B6000AF5C55 /* AppDelegate.swift */,
 				DA8C4BA127633B6000AF5C55 /* SceneDelegate.swift */,
 				DA8C4BA327633B6000AF5C55 /* ColorChooserViewController.swift */,
-				DA8C4BB527635D4B00AF5C55 /* GradientTextLabel.swift */,
 				DA8C4BA527633B6000AF5C55 /* Main.storyboard */,
 				DAECE9442763C28200EB9DFE /* UIColor+hex.swift */,
-				DAECE948276505B700EB9DFE /* Comparable+.swift */,
 				DAECE9462763D90200EB9DFE /* UIView+Shimmering.swift */,
 				DAECE94C2765D6F200EB9DFE /* UILabel+TextGradient.swift */,
+				DAECE948276505B700EB9DFE /* Comparable+.swift */,
 				DA8C4BA827633B6400AF5C55 /* Assets.xcassets */,
 				DA8C4BAA27633B6400AF5C55 /* LaunchScreen.storyboard */,
 				DA8C4BAD27633B6400AF5C55 /* Info.plist */,
@@ -157,7 +154,6 @@
 				DAECE94D2765D6F200EB9DFE /* UILabel+TextGradient.swift in Sources */,
 				DAECE9452763C28200EB9DFE /* UIColor+hex.swift in Sources */,
 				DA8C4BA427633B6000AF5C55 /* ColorChooserViewController.swift in Sources */,
-				DA8C4BB627635D4C00AF5C55 /* GradientTextLabel.swift in Sources */,
 				DAECE9472763D90200EB9DFE /* UIView+Shimmering.swift in Sources */,
 				DA8C4BA027633B6000AF5C55 /* AppDelegate.swift in Sources */,
 				DA8C4BA227633B6000AF5C55 /* SceneDelegate.swift in Sources */,

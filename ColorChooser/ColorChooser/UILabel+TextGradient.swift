@@ -8,6 +8,8 @@
 import UIKit
 
 extension UILabel {
+    
+    // TODO: make a custom UILabel subclass instead
     @discardableResult
     func applyGradientWith(colors: [UIColor], vertical: Bool = false) -> Bool {
 

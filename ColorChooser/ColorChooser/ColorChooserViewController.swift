@@ -12,6 +12,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     // MARK: - @IBOutlets
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var colorPanelStackView: UIStackView!
     @IBOutlet weak var colorDisplay: UIView!
     @IBOutlet weak var hexTextField: UITextField!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -60,22 +61,23 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setDynamicFontSizeAndConstraints()
-        traitCollectionDidChange(nil) // TODO: extract to separate func
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        titleLabel.applyGradientWith(colors: [.red, .yellow])
+        titleLabel.applyGradientWith(colors: [.red, .orange])
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        if traitCollection.verticalSizeClass == .compact {
-            stackBottomToSafeConstaint.constant = 16 // FIXME: replace `magic numbers`
-        } else {
-            stackBottomToSafeConstaint.constant = view.bounds.height / 3
-        }
-    }
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        super.traitCollectionDidChange(previousTraitCollection)
+//        if traitCollection.verticalSizeClass == .compact {
+//            stackBottomToSafeConstaint.constant = 16 // FIXME: replace `magic numbers`
+//        } else {
+//            // FIXME: calculte
+//            stackBottomToSafeConstaint.constant = view.bounds.height - titleLabel.frame.height - colorPanelStackView.frame.height
+//            print(stackBottomToSafeConstaint.constant)
+//        }
+//    }
     
     // MARK: - @IBActions
     
@@ -195,10 +197,10 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
         for view in view.subviews {
             if let label = view as? UILabel {
                 // label.font = fontMetrics.scaledFont(for: label.font)
-                label.font = fontMetrics.scaledFont(for: UIFont.preferredFont(forTextStyle: .headline).withSize(labelFontSize +  20 * CGFloat(label.tag)))
+                label.font = fontMetrics.scaledFont(for: label.font.withSize(labelFontSize +  20 * CGFloat(label.tag)))
                 label.layer.contentsGravity = .center
             } else if let textField = view as? UITextField {
-                textField.font = fontMetrics.scaledFont(for: .systemFont(ofSize: hexTVFontSize))
+                textField.font = fontMetrics.scaledFont(for: textField.font?.withSize(hexTVFontSize) ?? .systemFont(ofSize: hexTVFontSize))
             } else {
                 // Recursive loop through subview
                 adjustFonts(in: view)
