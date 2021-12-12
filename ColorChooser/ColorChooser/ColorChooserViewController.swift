@@ -37,7 +37,6 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var stackBottomToSafeConstaint: NSLayoutConstraint!
     
-    
     // MARK: - Lificycle methods
     
     override func viewDidLoad() {
@@ -84,7 +83,6 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
             break
         }
     }
-    
     
     @IBAction func rgbSliderValueChanged(_ sender: UISlider) {
         
@@ -172,6 +170,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
             hueValueLabel.text = hueSlider.value.fratcionDigitis(2)
             saturationValueLabel.text = saturationSlider.value.fratcionDigitis(2)
             brightnesValueLabel.text = brightnesSlider.value.fratcionDigitis(2)
+            
         } else {
             [redSlider, greenSlider, blueSlider].forEach{ $0?.isEnabled = false }
             [redValueLabel, greenValueLabel, blueValueLabel].forEach{ $0?.text = "?"}
@@ -179,6 +178,9 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
             [hueSlider, saturationSlider, brightnesSlider].forEach{ $0?.isEnabled = false }
             [hueValueLabel, saturationValueLabel, brightnesValueLabel].forEach{ $0?.text = "?"}
         }
+        
+           colorDisplay.startShimmering()
+
     }
     
     private func adjustFonts(`in` view: UIView) {

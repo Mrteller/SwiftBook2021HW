@@ -20,25 +20,25 @@ extension UIView {
         
         gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
         gradient.endPoint   = CGPoint(x: 1.0, y: 0.525)
-        gradient.locations  = [0.4, 0.5, 0.6]
+        gradient.locations  = [0.0, 0.0, 0.0]
         
         layer.mask = gradient
         
-        let animation: CABasicAnimation = CABasicAnimation.init(keyPath: "locations")
+        let animation = CABasicAnimation.init(keyPath: "locations")
         animation.fromValue = [0.0, 0.1, 0.2]
         animation.toValue   = [0.8, 0.9, 1.0]
         
         animation.duration = 1.5
-        animation.repeatCount = Float.greatestFiniteMagnitude
-        animation.isRemovedOnCompletion = false
+        animation.repeatCount = 1
+        animation.isRemovedOnCompletion = true
+        if !(Self.inheritedAnimationDuration > 0) {
+            gradient.add(animation, forKey: "shimmer")
+        }
         
-        gradient.add(animation, forKey: "shimmer")
     }
 
     
-    
     func stopShimmering() {
-        
         layer.mask = nil
     }
 }
