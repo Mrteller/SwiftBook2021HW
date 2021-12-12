@@ -11,6 +11,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - @IBOutlets
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var colorDisplay: UIView!
     @IBOutlet weak var hexTextField: UITextField!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -57,11 +58,18 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setDynamicFontSizeAndConstraints()
         traitCollectionDidChange(nil) // TODO: extract to separate func
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        titleLabel.applyGradientWith(colors: [.red, .yellow])
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
         if traitCollection.verticalSizeClass == .compact {
             stackBottomToSafeConstaint.constant = 16 // FIXME: replace `magic numbers`
         } else {
@@ -187,7 +195,8 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
         for view in view.subviews {
             if let label = view as? UILabel {
                 // label.font = fontMetrics.scaledFont(for: label.font)
-                label.font = fontMetrics.scaledFont(for: UIFont.preferredFont(forTextStyle: .headline).withSize(labelFontSize))
+                label.font = fontMetrics.scaledFont(for: UIFont.preferredFont(forTextStyle: .headline).withSize(labelFontSize +  20 * CGFloat(label.tag)))
+                label.layer.contentsGravity = .center
             } else if let textField = view as? UITextField {
                 textField.font = fontMetrics.scaledFont(for: .systemFont(ofSize: hexTVFontSize))
             } else {
@@ -198,8 +207,9 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func adjustConstraints() {
-        rgbLabelMinWidthConstraint.constant = NSString("0.00").size(withAttributes: [.font : redValueLabel.font!]).width // TODO: proper calculation
-        hsbLabelMinWidthConstraint.constant = NSString("0.00").size(withAttributes: [.font : hueValueLabel.font!]).width
+        
+        rgbLabelMinWidthConstraint.constant = "0.00".size(withAttributes: [.font : redValueLabel.font ?? .systemFont(ofSize: labelFontSize)]).width // TODO: proper calculation
+        hsbLabelMinWidthConstraint.constant = "0.00".size(withAttributes: [.font : hueValueLabel.font ?? .systemFont(ofSize: labelFontSize)]).width
         
         let segmentedControlFont = fontMetrics.scaledFont(for: UIFont.systemFont(ofSize: segmentedControlFontSize))
         segmentedControl.setTitleTextAttributes([.font : segmentedControlFont], for: .normal)
