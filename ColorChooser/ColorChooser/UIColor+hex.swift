@@ -78,7 +78,7 @@ extension UIColor {
         case 300..<360: red = b; green = p; blue = q
         default: return nil
         }
-            return String(format: "%02lX%02lX%02lX", Int(red), Int(green), Int(blue))
+            return String(format: "%02lX%02lX%02lX", Int(red * 255), Int(green * 255), Int(blue * 255))
         }
     }
 

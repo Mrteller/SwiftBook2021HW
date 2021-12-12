@@ -15,6 +15,8 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var hexTextField: UITextField!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var rgbStackView: UIStackView!
+    
     @IBOutlet weak var redValueLabel: UILabel!
     @IBOutlet weak var greenValueLabel: UILabel!
     @IBOutlet weak var blueValueLabel: UILabel!
@@ -23,14 +25,30 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var greenSlider: UISlider!
     @IBOutlet weak var blueSlider: UISlider!
     
+    @IBOutlet weak var hsbStackView: UIStackView!
+    
+    @IBOutlet weak var hueValueLabel: UILabel!
+    @IBOutlet weak var saturationValueLabel: UILabel!
+    @IBOutlet weak var brightnesValueLabel: UILabel!
+    
+    @IBOutlet weak var hueSlider: UISlider!
+    @IBOutlet weak var saturationSlider: UISlider!
+    @IBOutlet weak var brightnesSlider: UISlider!
+    
+    @IBOutlet weak var stackBottomToSafeConstaint: NSLayoutConstraint!
+    
+    
     // MARK: - Lificycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updateSliders(from: hexTextField.text ?? "")
+        
         segmentedControl.addConstraint(segmentedControlMinHeightConstraint)
 
-        redValueLabel.addConstraint(labelMinWidthConstraint)
+        redValueLabel.addConstraint(rgbLabelMinWidthConstraint)
+        hueValueLabel.addConstraint(hsbLabelMinWidthConstraint)
         
         colorDisplay.backgroundColor = UIColor(displayP3Red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
         
@@ -41,14 +59,46 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         setDynamicFontSizeAndConstraints()
+        traitCollectionDidChange(nil) // TODO: extract to separate func
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if traitCollection.verticalSizeClass == .compact {
+            stackBottomToSafeConstaint.constant = 16 // FIXME: replace `magic numbers`
+        } else {
+            stackBottomToSafeConstaint.constant = view.bounds.height / 3
+        }
     }
     
     // MARK: - @IBActions
     
+    @IBAction func colorspaceSegmentedControlValueChanged() {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            hsbStackView.isHidden = true
+            rgbStackView.isHidden = false
+        case 1:
+            rgbStackView.isHidden = true
+            hsbStackView.isHidden = false
+        default:
+            break
+        }
+    }
+    
+    
     @IBAction func rgbSliderValueChanged(_ sender: UISlider) {
-        (r, g, b) = (CGFloat(redSlider.value), CGFloat(greenSlider.value), CGFloat(blueSlider.value))
         
-        hexTextField.text = UIColor.toHex(r: r, g: g, b: b)
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            (r, g, b) = (CGFloat(redSlider.value), CGFloat(greenSlider.value), CGFloat(blueSlider.value))
+            hexTextField.text = UIColor.toHex(r: r, g: g, b: b)
+        case 1:
+            (h, s, br) = (CGFloat(hueSlider.value), CGFloat(saturationSlider.value), CGFloat(brightnesSlider.value))
+            hexTextField.text = UIColor.toHex(h: h, s: s, b: br)
+        default:
+            break
+        }
+        
         updateColorDisplay(from: hexTextField.text)
         updateSliders(from: hexTextField.text ?? "") // setting slider value does not fire `rgbSliderValueChanged()`, so it is OK
     }
@@ -89,8 +139,10 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     private lazy var hexTVFontSize: CGFloat = 24 * screenMultiplier
     private lazy var labelFontSize: CGFloat = 20 * screenMultiplier
     private var r: CGFloat = 0.5; private var g: CGFloat = 0.5; private var b: CGFloat = 0.5; private var a: CGFloat = 1
-    private lazy var labelMinWidthConstraint = NSLayoutConstraint(item: redValueLabel!, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .width, multiplier: 1, constant: redValueLabel.font.xHeight * 3)
+    private var h: CGFloat = 0.5; private var s: CGFloat = 0.5; private var br: CGFloat = 0.5;
     private lazy var segmentedControlMinHeightConstraint = NSLayoutConstraint(item: segmentedControl!, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .height, multiplier: 1, constant: segmentedControlFontSize)
+    private lazy var rgbLabelMinWidthConstraint = NSLayoutConstraint(item: redValueLabel!, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .width, multiplier: 1, constant: redValueLabel.font.xHeight * 3)
+    private lazy var hsbLabelMinWidthConstraint = NSLayoutConstraint(item: hueValueLabel!, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .width, multiplier: 1, constant: hueValueLabel.font.xHeight * 3)
  
     // MARK: - Private methods
     
@@ -109,13 +161,23 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
         if let color = UIColor(hex: hex) {
             color.getRed(&r, green: &g, blue: &b, alpha: &a)
             (redSlider.value, greenSlider.value, blueSlider.value) = (Float(r), Float(g), Float(b))
-            [redSlider, greenSlider, blueSlider].forEach({ $0?.isEnabled = true })
+            [redSlider, greenSlider, blueSlider].forEach{ $0?.isEnabled = true }
             redValueLabel.text = redSlider.value.fratcionDigitis(2)
             greenValueLabel.text = greenSlider.value.fratcionDigitis(2)
             blueValueLabel.text = blueSlider.value.fratcionDigitis(2)
+            
+            color.getHue(&h, saturation: &s, brightness: &br, alpha: &a)
+            (hueSlider.value, saturationSlider.value, brightnesSlider.value) = (Float(h), Float(s), Float(br))
+            [hueSlider, greenSlider, brightnesSlider].forEach{ $0?.isEnabled = true }
+            hueValueLabel.text = hueSlider.value.fratcionDigitis(2)
+            saturationValueLabel.text = saturationSlider.value.fratcionDigitis(2)
+            brightnesValueLabel.text = brightnesSlider.value.fratcionDigitis(2)
         } else {
             [redSlider, greenSlider, blueSlider].forEach{ $0?.isEnabled = false }
             [redValueLabel, greenValueLabel, blueValueLabel].forEach{ $0?.text = "?"}
+            
+            [hueSlider, saturationSlider, brightnesSlider].forEach{ $0?.isEnabled = false }
+            [hueValueLabel, saturationValueLabel, brightnesValueLabel].forEach{ $0?.text = "?"}
         }
     }
     
@@ -134,8 +196,9 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func adjustConstraints() {
-        labelMinWidthConstraint.constant = NSString("0.00").size(withAttributes: [.font : redValueLabel.font!]).width // TODO: proper calculation
-       
+        rgbLabelMinWidthConstraint.constant = NSString("0.00").size(withAttributes: [.font : redValueLabel.font!]).width // TODO: proper calculation
+        hsbLabelMinWidthConstraint.constant = NSString("0.00").size(withAttributes: [.font : hueValueLabel.font!]).width
+        
         let segmentedControlFont = fontMetrics.scaledFont(for: UIFont.systemFont(ofSize: segmentedControlFontSize))
         segmentedControl.setTitleTextAttributes([.font : segmentedControlFont], for: .normal)
         segmentedControlMinHeightConstraint.constant = segmentedControlFont.pointSize
