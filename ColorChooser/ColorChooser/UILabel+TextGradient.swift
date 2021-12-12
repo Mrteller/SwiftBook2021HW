@@ -11,9 +11,9 @@ extension UILabel {
     @discardableResult
     func applyGradientWith(colors: [UIColor], vertical: Bool = false) -> Bool {
 
-        guard let gradientText = text, let font = font else { return false }
-        let textSize = gradientText.size(withAttributes: [.font : font])
-
+        // guard let gradientText = text , let font = font else { return false }
+        // let textSize = gradientText.size(withAttributes: [.font : font])
+        let textSize = bounds.size
         UIGraphicsBeginImageContext(CGSize(width: textSize.width, height: textSize.height))
 
         guard let context = UIGraphicsGetCurrentContext()
