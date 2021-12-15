@@ -78,9 +78,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if textField === passwordTextField {
             switch authorize(login: userNameTextField.text, password: passwordTextField.text) {
             case .success:
-                performSegue(withIdentifier: "loggedInSegue", sender: view)
+                performSegue(withIdentifier: "loggedInSegue", sender: self)
             case .failure(let reason):
-                showLoginFailed(reason: reason as? String) // reason.localizedDescription IRL
+                showLoginFailed(reason: reason.localizedDescription)
             }
         }
         return true
@@ -148,5 +148,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
 }
 
-// !!!: A quick way to create Errors. Do not use in production.
-extension String: Error { }
+// A quick way to create Errors.
+extension String: LocalizedError {
+    public var errorDescription: String? {
+        NSLocalizedString(self, comment: "Error")
+    }
+}

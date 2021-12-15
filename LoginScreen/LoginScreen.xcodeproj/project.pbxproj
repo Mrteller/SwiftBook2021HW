@@ -11,11 +11,11 @@
 		DA641C4A2767DA8A001223C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA641C492767DA8A001223C8 /* SceneDelegate.swift */; };
 		DA641C4C2767DA8A001223C8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA641C4B2767DA8A001223C8 /* LoginViewController.swift */; };
 		DA641C4F2767DA8A001223C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA641C4D2767DA8A001223C8 /* Main.storyboard */; };
-		DA641C512767DA8D001223C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA641C502767DA8D001223C8 /* Assets.xcassets */; };
 		DA641C542767DA8D001223C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA641C522767DA8D001223C8 /* LaunchScreen.storyboard */; };
 		DA641C5E2768823F001223C8 /* GreetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA641C5D2768823F001223C8 /* GreetingViewController.swift */; };
 		DA641C632768ED22001223C8 /* UnderKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA641C622768ED22001223C8 /* UnderKeyboard.swift */; };
 		DACDA5192769E8640085D04E /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACDA5182769E8630085D04E /* UIAlertController+Extensions.swift */; };
+		DACDA51F276A72440085D04E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA641C502767DA8D001223C8 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,7 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA641C542767DA8D001223C8 /* LaunchScreen.storyboard in Resources */,
-				DA641C512767DA8D001223C8 /* Assets.xcassets in Resources */,
+				DACDA51F276A72440085D04E /* Assets.xcassets in Resources */,
 				DA641C4F2767DA8A001223C8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
