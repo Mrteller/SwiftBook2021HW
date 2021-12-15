@@ -21,15 +21,10 @@ class GreetingViewController: UIViewController {
     
     var userName: String?
     
-    // MARK: - Lifecycle methods
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
 
     // MARK: - Private funcs
     
-    private func greetUser(user name: String?, greeting: String = NSLocalizedString("Hello", comment: "Greeting default string")) -> String {
+    private func greetUser(user name: String?, greeting: String = "Hello") -> String {
         if let name = name, !name.isEmpty {
             return "\(greeting), \(name)"
         } else {
