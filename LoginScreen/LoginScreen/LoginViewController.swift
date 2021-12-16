@@ -28,6 +28,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         passwordTextField.leftViewMode = .always
         passwordTextField.leftView = imageView(for: "lock", textStyle: .largeTitle)
+        passwordTextField.isSecureTextEntry = true
         
         underKeyboardLayoutConstraint.setup(stackBottomConstraint, view: view, minMargin: 0)
     }
@@ -74,7 +75,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         } else {
             textField.resignFirstResponder()
         }
-
+        
         if textField === passwordTextField {
             switch authorize(login: userNameTextField.text, password: passwordTextField.text) {
             case .success:
@@ -86,8 +87,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        print(#function)
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        setReturnKeyState(for: textField, isEnabled: validateInput(textField.text), delay: 0.1) // A bit hacky it needs delay here
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if var text = textField.text, let range = Range(range, in: text) {
+            text.replaceSubrange(range, with: string)
+            setReturnKeyState(for: textField, isEnabled: validateInput(text))
+        }
+        return true
     }
     
     
@@ -145,6 +154,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         present(alert, animated: true)
     }
+    
+    // sample condition checker
+    private func validateInput(_ string: String?) -> Bool {
+        (string?.count ?? 0) > 3
+    }
 
 }
 
@@ -152,5 +166,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 extension String: LocalizedError {
     public var errorDescription: String? {
         NSLocalizedString(self, comment: "Error")
+    }
+}
+
+
+extension UITextFieldDelegate {
+    func setReturnKeyState(for textField: UITextField, isEnabled: Bool, delay: Double? = nil) {
+        textField.enablesReturnKeyAutomatically = false
+        if textField.delegate != nil {
+            if let delay = delay {
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    textField.setValue(isEnabled, forKeyPath: "inputDelegate.returnKeyEnabled")
+                }
+            } else {
+                textField.setValue(isEnabled, forKeyPath: "inputDelegate.returnKeyEnabled")
+            }
+        }
     }
 }
