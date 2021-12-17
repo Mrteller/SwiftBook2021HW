@@ -16,6 +16,7 @@
 		DA641C632768ED22001223C8 /* UnderKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA641C622768ED22001223C8 /* UnderKeyboard.swift */; };
 		DACDA5192769E8640085D04E /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACDA5182769E8630085D04E /* UIAlertController+Extensions.swift */; };
 		DACDA51F276A72440085D04E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA641C502767DA8D001223C8 /* Assets.xcassets */; };
+		DADE0CE6276CD33C00AF4A85 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CE3276CD2DC00AF4A85 /* Credentials.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		DA641C5D2768823F001223C8 /* GreetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetingViewController.swift; sourceTree = "<group>"; };
 		DA641C622768ED22001223C8 /* UnderKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderKeyboard.swift; sourceTree = "<group>"; };
 		DACDA5182769E8630085D04E /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
+		DADE0CE3276CD2DC00AF4A85 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Credentials.swift; path = LoginScreen/Models/Credentials.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,18 +64,67 @@
 		DA641C462767DA8A001223C8 /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
-				DA641C472767DA8A001223C8 /* AppDelegate.swift */,
-				DA641C492767DA8A001223C8 /* SceneDelegate.swift */,
-				DA641C4B2767DA8A001223C8 /* LoginViewController.swift */,
-				DA641C5D2768823F001223C8 /* GreetingViewController.swift */,
-				DA641C4D2767DA8A001223C8 /* Main.storyboard */,
-				DA641C622768ED22001223C8 /* UnderKeyboard.swift */,
-				DACDA5182769E8630085D04E /* UIAlertController+Extensions.swift */,
-				DA641C502767DA8D001223C8 /* Assets.xcassets */,
-				DA641C522767DA8D001223C8 /* LaunchScreen.storyboard */,
-				DA641C552767DA8D001223C8 /* Info.plist */,
+				DADE0CDE276CD0AB00AF4A85 /* ViewControllers */,
+				DADE0CDF276CD11000AF4A85 /* Storyboards */,
+				DADE0CE5276CD32000AF4A85 /* Models */,
+				DADE0CE2276CD1DC00AF4A85 /* AuxiliaryFiles */,
+				DADE0CE1276CD19500AF4A85 /* SupportingFiles */,
+				DADE0CE0276CD14F00AF4A85 /* Resourses */,
 			);
 			path = LoginScreen;
+			sourceTree = "<group>";
+		};
+		DADE0CDE276CD0AB00AF4A85 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DA641C4B2767DA8A001223C8 /* LoginViewController.swift */,
+				DA641C5D2768823F001223C8 /* GreetingViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DADE0CDF276CD11000AF4A85 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				DA641C4D2767DA8A001223C8 /* Main.storyboard */,
+				DA641C522767DA8D001223C8 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		DADE0CE0276CD14F00AF4A85 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				DA641C502767DA8D001223C8 /* Assets.xcassets */,
+			);
+			path = Resourses;
+			sourceTree = "<group>";
+		};
+		DADE0CE1276CD19500AF4A85 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				DA641C472767DA8A001223C8 /* AppDelegate.swift */,
+				DA641C492767DA8A001223C8 /* SceneDelegate.swift */,
+				DA641C552767DA8D001223C8 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		DADE0CE2276CD1DC00AF4A85 /* AuxiliaryFiles */ = {
+			isa = PBXGroup;
+			children = (
+				DA641C622768ED22001223C8 /* UnderKeyboard.swift */,
+				DACDA5182769E8630085D04E /* UIAlertController+Extensions.swift */,
+			);
+			path = AuxiliaryFiles;
+			sourceTree = "<group>";
+		};
+		DADE0CE5276CD32000AF4A85 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DADE0CE3276CD2DC00AF4A85 /* Credentials.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +222,7 @@
 				DA641C4C2767DA8A001223C8 /* LoginViewController.swift in Sources */,
 				DA641C482767DA8A001223C8 /* AppDelegate.swift in Sources */,
 				DA641C4A2767DA8A001223C8 /* SceneDelegate.swift in Sources */,
+				DADE0CE6276CD33C00AF4A85 /* Credentials.swift in Sources */,
 				DACDA5192769E8640085D04E /* UIAlertController+Extensions.swift in Sources */,
 				DA641C5E2768823F001223C8 /* GreetingViewController.swift in Sources */,
 				DA641C632768ED22001223C8 /* UnderKeyboard.swift in Sources */,
@@ -322,7 +374,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WEJF495R4D;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LoginScreen/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -351,7 +403,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WEJF495R4D;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LoginScreen/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

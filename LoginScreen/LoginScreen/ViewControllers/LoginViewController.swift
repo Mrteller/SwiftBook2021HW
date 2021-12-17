@@ -35,7 +35,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "loggedInSegue" {
-            if case let .failure(reason) = authorize(login: userNameTextField.text, password: passwordTextField.text) {
+            if case let .failure(reason) = Session.getPerson(login: userNameTextField.text, password: passwordTextField.text) {
                 showLoginFailed(reason: reason as? String)
                 return false
             }
@@ -77,7 +77,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         
         if textField === passwordTextField {
-            switch authorize(login: userNameTextField.text, password: passwordTextField.text) {
+            switch Session.getPerson(login: userNameTextField.text, password: passwordTextField.text) {
             case .success:
                 performSegue(withIdentifier: "loggedInSegue", sender: self)
             case .failure(let reason):
@@ -101,21 +101,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     // MARK: - Private funcs
-    /// Simulate authorizse procedure
-    private func authorize(login: String?, password: String?) -> Result<String, Error> {
-        switch (login, password) {
-        case ("username", "password"), ("username@mail.com", "password"):
-            return .success("username")
-        case (_, _) where (login == nil || login?.isEmpty ?? true) :
-            return .failure("Username is not provided.")
-        case (_, _) where (password == nil || password?.isEmpty ?? true) :
-            return .failure("Password is not provided.")
-        case let (uName?, pass?):
-            return .failure("Incorrect credentials:\n\(uName)\\\(pass)")
-        default:
-            return .failure("Failed to log in")
-        }
-    }
     
     private func imageView(for systemImageName: String, textStyle: UIFont.TextStyle = .largeTitle, tintColor: UIColor? = nil) -> UIImageView{
         let config = UIImage.SymbolConfiguration(textStyle: textStyle)
@@ -143,7 +128,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func showCredentials() {
-        let alert = basicAlert(title: "Тестовая учётная запись", message: "username\npassword")
+        let alert = basicAlert(title: "Тестовая учётная запись", message: Credentials.default.description)
         present(alert, animated: true)
     }
     
