@@ -1,5 +1,5 @@
 //
-//  UIAlertController+Extensions.swift
+//  UIAlertController+.swift
 //  LoginScreen
 //
 //  Created by  Paul on 14.12.2021.

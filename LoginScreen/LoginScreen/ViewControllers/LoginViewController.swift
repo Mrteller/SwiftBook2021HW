@@ -34,16 +34,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "loggedInSegue" {
-            if case let .failure(reason) = Session.getPerson(login: userNameTextField.text, password: passwordTextField.text) {
-                showLoginFailed(reason: reason as? String)
-                return false
-            }
+            tryToLogin()
         }
         return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let greetingVC = segue.destination as? GreetingViewController {
+        if let greetingVC = segue.destination.allContentControllersOf(type: GreetingViewController.self).first {
             greetingVC.userName = userNameTextField.text
         }
     }
@@ -59,12 +56,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         userNameTextField.text = ""
         passwordTextField.text = ""
     }
-    @IBAction func forgotLoginButton(_ sender: UIButton) {
-        showCredentials()
+    @IBAction func forgotLoginOrPasswordButton(_ sender: UIButton) {
+        showCredentials(tag: sender.tag)
     }
-    @IBAction func forgotPasswordButton(_ sender: UIButton) {
-        showCredentials()
-    }
+
     
     // MARK: - Public funcs
     
@@ -75,13 +70,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             textField.resignFirstResponder()
         }
         
-        if textField === passwordTextField {
-            switch Session.getPerson(login: userNameTextField.text, password: passwordTextField.text) {
-            case .success:
-                performSegue(withIdentifier: "loggedInSegue", sender: self)
-            case .failure(let reason):
-                showLoginFailed(reason: reason.localizedDescription)
-            }
+        if textField === passwordTextField, tryToLogin() {
+            performSegue(withIdentifier: "loggedInSegue", sender: self)
         }
         return true
     }
@@ -100,6 +90,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     // MARK: - Private funcs
+    
+    @discardableResult
+    private func tryToLogin() -> Bool {
+        switch Session.getPerson(login: userNameTextField.text, password: passwordTextField.text) {
+        case .success:
+            userNameTextField.text = ""
+            passwordTextField.text = ""
+            return true
+        case .failure(let reason):
+            passwordTextField.text = ""
+            showLoginFailed(reason: reason.localizedDescription)
+            return false
+        }
+    }
     
     private func imageView(for systemImageName: String, textStyle: UIFont.TextStyle = .largeTitle, tintColor: UIColor? = nil) -> UIImageView{
         let config = UIImage.SymbolConfiguration(textStyle: textStyle)
@@ -126,8 +130,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return alert
     }
     
-    private func showCredentials() {
-        let alert = basicAlert(title: "Тестовая учётная запись", message: Credentials.default.description)
+    private func showCredentials(tag: Int = 0) {
+        let alert: UIAlertController
+        switch tag {
+        case 1:
+            alert = basicAlert(title: "Test login", message: Credentials.default.login)
+        case 2:
+            alert = basicAlert(title: "Test password", message: Credentials.default.password)
+        default:
+            alert = basicAlert(title: "Тестовая учётная запись", message: Credentials.default.description)
+        }
+        
         present(alert, animated: true)
     }
     
