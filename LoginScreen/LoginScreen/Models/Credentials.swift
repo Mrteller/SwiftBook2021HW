@@ -26,7 +26,7 @@ struct Person {
     static var `default` = Person(name: "User", bio: "Some info", birthDate: dateFormatter.date(from: "23/02/1990"))
 }
 
-/// Simulation of session to some remote storage.
+/// Simulation of session to some remote storage. It could be a singelton instead.
 struct Session {
     
     static func getPerson(login: String?, password: String?) -> Result<Person, Error> {

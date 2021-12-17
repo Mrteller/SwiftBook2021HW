@@ -28,7 +28,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         passwordTextField.leftViewMode = .always
         passwordTextField.leftView = imageView(for: "lock", textStyle: .largeTitle)
-        passwordTextField.isSecureTextEntry = true
         
         underKeyboardLayoutConstraint.setup(stackBottomConstraint, view: view, minMargin: 0)
     }
