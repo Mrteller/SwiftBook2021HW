@@ -18,6 +18,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Private vars
     
+    private var person: Person?
     private let underKeyboardLayoutConstraint = UnderKeyboardLayoutConstraint()
     
     // MARK: - Lifecycle methods
@@ -41,7 +42,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let greetingVC = segue.destination.allContentControllersOf(type: GreetingViewController.self).first {
-            greetingVC.userName = userNameTextField.text
+            greetingVC.userName = person?.name
+            greetingVC.avatarURL = person?.avatarURL
         }
     }
     
@@ -94,7 +96,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @discardableResult
     private func tryToLogin() -> Bool {
         switch Session.getPerson(login: userNameTextField.text, password: passwordTextField.text) {
-        case .success:
+        case .success(let person):
+            self.person = person
             userNameTextField.text = ""
             passwordTextField.text = ""
             return true
@@ -138,7 +141,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         case 2:
             alert = basicAlert(title: "Test password", message: Credentials.default.password)
         default:
-            alert = basicAlert(title: "Тестовая учётная запись", message: Credentials.default.description)
+            alert = basicAlert(title: "Test credentials", message: Credentials.default.description)
         }
         
         present(alert, animated: true)

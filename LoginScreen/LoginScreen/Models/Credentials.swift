@@ -19,11 +19,34 @@ struct Credentials: Hashable, CustomStringConvertible {
 }
 
 struct Person {
-    var name: String
-    var bio: String
-    var birthDate: Date?
     
-    static var `default` = Person(name: "User", bio: "Some info", birthDate: dateFormatter.date(from: "23/02/1990"))
+    struct Project {
+        let name: String
+        let htmlURL: URL
+    }
+    
+    let name: String
+    let userName: String
+    let bio: String
+    let birthDate: Date?
+    let avatarURL: URL?
+    let projects: [Project]
+    
+    static var `default` = Person(
+        name: "Mr Teller",
+        userName: "mrteller",
+        bio: "Some info",
+        birthDate: dateFormatter.date(from: "23/02/1990"),
+        avatarURL: URL(string: "https://avatars.githubusercontent.com/u/39244601?v=4"),
+        projects: [
+            Project(name: "SwiftBook2021HW",
+                    htmlURL: URL(string: "https://github.com/Mrteller/SwiftBook2021HW")!),
+            Project(name: "MatrixEnter",
+                    htmlURL: URL(string: "https://github.com/Mrteller/MatrixEnter")!),
+            Project(name: "CasinoRoulette",
+                    htmlURL: URL(string: "https://github.com/Mrteller/CasinoRoulette")!)
+        ]
+    )
 }
 
 /// Simulation of session to some remote storage. It could be a singelton instead.
