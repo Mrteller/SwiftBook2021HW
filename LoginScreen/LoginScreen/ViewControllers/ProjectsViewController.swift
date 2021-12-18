@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProjectsViewController: UITableViewController {
+class ProjectsViewController: UITableViewController, UISplitViewControllerDelegate {
     
     // MARK: - @IBOutlets
 
@@ -16,6 +16,11 @@ class ProjectsViewController: UITableViewController {
     var projecs: [Person.Project]!
     
     // MARK: - Lifecycle methods
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.splitViewController?.delegate = self
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "cellToWebView") {
@@ -38,6 +43,20 @@ class ProjectsViewController: UITableViewController {
         cell.textLabel?.text = projecs[indexPath.row].name
         cell.detailTextLabel?.text = projecs[indexPath.row].htmlURL.absoluteString
         return cell
+    }
+    
+    func splitViewController(
+        _ splitViewController: UISplitViewController,
+        collapseSecondary secondaryViewController: UIViewController,
+        onto primaryViewController: UIViewController
+    ) -> Bool {
+        if primaryViewController.allContentControllersOf(type: type(of: self)).contains(self) {
+            if let ivc = secondaryViewController.allContentControllersOf(type: WebViewController.self).first,
+                ivc.url == nil {
+                return true
+            }
+        }
+        return false
     }
 
 
