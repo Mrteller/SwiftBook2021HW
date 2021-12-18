@@ -21,7 +21,9 @@ extension UIViewController
             } else if let tabCon = controller as? UITabBarController,
                       let controllers = tabCon.viewControllers  {
                 controllers.forEach{ getContentControllers(for: $0) }
-            }
+            } else if let splitCon = controller as? UISplitViewController {
+                splitCon.viewControllers.forEach{ getContentControllers(for: $0) }
+           }
         }
         getContentControllers(for: self)
         return all

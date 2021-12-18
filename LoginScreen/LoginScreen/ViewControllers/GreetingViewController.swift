@@ -42,16 +42,15 @@ class GreetingViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if avatarImageView?.image == nil { // appeared on screen so, if needed:
+        if avatarImageView?.image == nil { // about to appear on screen so, if needed:
             fetchImage()
         }
     }
     
 
     // MARK: - Private funcs
-    
     
     private func fetchImage() {
         // TODO: replace magic number with constants in some namespace

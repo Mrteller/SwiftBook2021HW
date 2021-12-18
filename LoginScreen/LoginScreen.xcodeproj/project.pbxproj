@@ -18,6 +18,8 @@
 		DACDA51F276A72440085D04E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA641C502767DA8D001223C8 /* Assets.xcassets */; };
 		DADE0CE6276CD33C00AF4A85 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CE3276CD2DC00AF4A85 /* Credentials.swift */; };
 		DADE0CE8276D04F600AF4A85 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CE7276D04F600AF4A85 /* UIViewController+.swift */; };
+		DADE0CEA276E046300AF4A85 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CE9276E046300AF4A85 /* ProjectsViewController.swift */; };
+		DADE0CEC276E0E7D00AF4A85 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CEB276E0E7D00AF4A85 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		DACDA5182769E8630085D04E /* UIAlertController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
 		DADE0CE3276CD2DC00AF4A85 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Credentials.swift; path = LoginScreen/Models/Credentials.swift; sourceTree = SOURCE_ROOT; };
 		DADE0CE7276D04F600AF4A85 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		DADE0CE9276E046300AF4A85 /* ProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
+		DADE0CEB276E0E7D00AF4A85 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,8 @@
 			children = (
 				DA641C4B2767DA8A001223C8 /* LoginViewController.swift */,
 				DA641C5D2768823F001223C8 /* GreetingViewController.swift */,
+				DADE0CE9276E046300AF4A85 /* ProjectsViewController.swift */,
+				DADE0CEB276E0E7D00AF4A85 /* WebViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -225,11 +231,13 @@
 				DA641C4C2767DA8A001223C8 /* LoginViewController.swift in Sources */,
 				DA641C482767DA8A001223C8 /* AppDelegate.swift in Sources */,
 				DADE0CE8276D04F600AF4A85 /* UIViewController+.swift in Sources */,
+				DADE0CEC276E0E7D00AF4A85 /* WebViewController.swift in Sources */,
 				DA641C4A2767DA8A001223C8 /* SceneDelegate.swift in Sources */,
 				DADE0CE6276CD33C00AF4A85 /* Credentials.swift in Sources */,
 				DACDA5192769E8640085D04E /* UIAlertController+.swift in Sources */,
 				DA641C5E2768823F001223C8 /* GreetingViewController.swift in Sources */,
 				DA641C632768ED22001223C8 /* UnderKeyboard.swift in Sources */,
+				DADE0CEA276E046300AF4A85 /* ProjectsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

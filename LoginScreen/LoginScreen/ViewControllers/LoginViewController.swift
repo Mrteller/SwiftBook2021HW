@@ -45,6 +45,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             greetingVC.userName = person?.name
             greetingVC.avatarURL = person?.avatarURL
         }
+        if let projectsVC = segue.destination.allContentControllersOf(type: ProjectsViewController.self).first {
+            projectsVC.projecs = person?.projects
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
