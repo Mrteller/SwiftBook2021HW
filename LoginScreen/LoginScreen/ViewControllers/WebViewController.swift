@@ -22,7 +22,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     
     // MARK: - Private vars
     
-    var webView: WKWebView!
+    private var webView: WKWebView!
+    private var progressView = UIProgressView(progressViewStyle: .default)
     
     // MARK: - Initializers
     
@@ -35,12 +36,40 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         view = webView
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
+
+        progressView.sizeToFit()
+        let progressButton = UIBarButtonItem(customView: progressView)
+        
+        toolbarItems = [progressButton]
+        
+        navigationController?.isToolbarHidden = false
+        
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.isLoading), options: .new, context: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if url != webView.url {
             fetchWebPage()
         }
     }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        switch keyPath {
+        case #keyPath(WKWebView.estimatedProgress):
+            progressView.progress = Float(webView.estimatedProgress)
+        case #keyPath(WKWebView.isLoading):
+            navigationController?.isToolbarHidden = !webView.isLoading
+        default:
+            break
+        }
+    }
+    
     
     // MARK: - @IBActions
     

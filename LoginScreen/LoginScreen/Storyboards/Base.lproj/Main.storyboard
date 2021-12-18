@@ -292,11 +292,11 @@
             </objects>
             <point key="canvasLocation" x="860" y="98"/>
         </scene>
-        <!--Item-->
+        <!--Projects-->
         <scene sceneID="rQR-U8-5xa">
             <objects>
                 <splitViewController modalPresentationStyle="fullScreen" behavior="tile" id="1hR-zL-gYm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="IHg-0b-oWP"/>
+                    <tabBarItem key="tabBarItem" title="Projects" image="list.bullet.rectangle.portrait.fill" catalog="system" id="IHg-0b-oWP"/>
                     <connections>
                         <segue destination="bLi-9x-fng" kind="relationship" relationship="masterViewController" id="BY5-cS-tJb"/>
                         <segue destination="SPz-55-pLa" kind="relationship" relationship="detailViewController" id="es2-2e-qNp"/>
@@ -331,6 +331,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="list.bullet.rectangle.fill" catalog="system" width="128" height="93"/>
+        <image name="list.bullet.rectangle.portrait.fill" catalog="system" width="115" height="128"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
