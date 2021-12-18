@@ -65,7 +65,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         showCredentials(tag: sender.tag)
     }
 
-    
     // MARK: - Public funcs
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -92,7 +91,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
-    
     
     // MARK: - Private funcs
     
@@ -171,7 +169,6 @@ extension String: LocalizedError {
         NSLocalizedString(self, comment: "Error")
     }
 }
-
 
 extension UITextFieldDelegate {
     func setReturnKeyState(for textField: UITextField, isEnabled: Bool, delay: Double? = nil) {

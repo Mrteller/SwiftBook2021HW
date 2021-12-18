@@ -13,15 +13,15 @@ class GreetingViewController: UIViewController {
     
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    @IBOutlet weak var userGreetingLabel: UILabel! {
-        didSet {
-            userGreetingLabel.text = greetUser(user: userName)
-        }
-    }
+    @IBOutlet weak var userGreetingLabel: UILabel!
     
     // MARK: - Public vars
     
-    var userName: String?
+    var userName: String? {
+        didSet {
+            userGreetingLabel?.text = userName
+        }
+    }
     
     var avatarURL: URL? {
         didSet {
@@ -34,21 +34,19 @@ class GreetingViewController: UIViewController {
     
     // MARK: - Private vars
     
-
-    
     // MARK: - Lifecycle methods
-    
-    override func viewDidLoad() {
-        
-    }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if userGreetingLabel.text != userName {
+            userGreetingLabel.text = userName
+        }
+        
         if avatarImageView?.image == nil { // about to appear on screen so, if needed:
             fetchImage()
         }
     }
-    
 
     // MARK: - Private funcs
     
@@ -78,13 +76,13 @@ class GreetingViewController: UIViewController {
         }
     }
     
-    private func greetUser(user name: String?, greeting: String = "Hello") -> String {
-        if let name = name, !name.isEmpty {
-            return "\(greeting), \(name)"
-        } else {
-            return greeting
-        }
-    }
+//    private func greetUser(user name: String?, greeting: String = "Hello") -> String {
+//        if let name = name, !name.isEmpty {
+//            return "\(greeting), \(name)"
+//        } else {
+//            return greeting
+//        }
+//    }
 
 }
 
