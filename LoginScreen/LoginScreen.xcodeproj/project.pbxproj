@@ -16,10 +16,14 @@
 		DA641C632768ED22001223C8 /* UnderKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA641C622768ED22001223C8 /* UnderKeyboard.swift */; };
 		DACDA5192769E8640085D04E /* UIAlertController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACDA5182769E8630085D04E /* UIAlertController+.swift */; };
 		DACDA51F276A72440085D04E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA641C502767DA8D001223C8 /* Assets.xcassets */; };
-		DADE0CE6276CD33C00AF4A85 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CE3276CD2DC00AF4A85 /* Credentials.swift */; };
+		DADE0CE6276CD33C00AF4A85 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CE3276CD2DC00AF4A85 /* Models.swift */; };
 		DADE0CE8276D04F600AF4A85 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CE7276D04F600AF4A85 /* UIViewController+.swift */; };
 		DADE0CEA276E046300AF4A85 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CE9276E046300AF4A85 /* ProjectsViewController.swift */; };
 		DADE0CEC276E0E7D00AF4A85 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CEB276E0E7D00AF4A85 /* WebViewController.swift */; };
+		DADE0CF2276F19D400AF4A85 /* PictureContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CEE276F19D400AF4A85 /* PictureContentView.swift */; };
+		DADE0CF3276F19D400AF4A85 /* PictureListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CEF276F19D400AF4A85 /* PictureListCell.swift */; };
+		DADE0CF4276F19D400AF4A85 /* PicturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CF0276F19D400AF4A85 /* PicturesViewController.swift */; };
+		DADE0CF5276F19D400AF4A85 /* PictureContentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADE0CF1276F19D400AF4A85 /* PictureContentConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,10 +38,14 @@
 		DA641C5D2768823F001223C8 /* GreetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetingViewController.swift; sourceTree = "<group>"; };
 		DA641C622768ED22001223C8 /* UnderKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderKeyboard.swift; sourceTree = "<group>"; };
 		DACDA5182769E8630085D04E /* UIAlertController+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+.swift"; sourceTree = "<group>"; };
-		DADE0CE3276CD2DC00AF4A85 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Credentials.swift; path = LoginScreen/Models/Credentials.swift; sourceTree = SOURCE_ROOT; };
+		DADE0CE3276CD2DC00AF4A85 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Models.swift; path = LoginScreen/Models/Models.swift; sourceTree = SOURCE_ROOT; };
 		DADE0CE7276D04F600AF4A85 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		DADE0CE9276E046300AF4A85 /* ProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 		DADE0CEB276E0E7D00AF4A85 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		DADE0CEE276F19D400AF4A85 /* PictureContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureContentView.swift; sourceTree = "<group>"; };
+		DADE0CEF276F19D400AF4A85 /* PictureListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureListCell.swift; sourceTree = "<group>"; };
+		DADE0CF0276F19D400AF4A85 /* PicturesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicturesViewController.swift; sourceTree = "<group>"; };
+		DADE0CF1276F19D400AF4A85 /* PictureContentConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureContentConfiguration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +95,7 @@
 				DA641C5D2768823F001223C8 /* GreetingViewController.swift */,
 				DADE0CE9276E046300AF4A85 /* ProjectsViewController.swift */,
 				DADE0CEB276E0E7D00AF4A85 /* WebViewController.swift */,
+				DADE0CED276F19D400AF4A85 /* PicturesViewController */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -131,9 +140,20 @@
 		DADE0CE5276CD32000AF4A85 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				DADE0CE3276CD2DC00AF4A85 /* Credentials.swift */,
+				DADE0CE3276CD2DC00AF4A85 /* Models.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		DADE0CED276F19D400AF4A85 /* PicturesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DADE0CF0276F19D400AF4A85 /* PicturesViewController.swift */,
+				DADE0CEE276F19D400AF4A85 /* PictureContentView.swift */,
+				DADE0CEF276F19D400AF4A85 /* PictureListCell.swift */,
+				DADE0CF1276F19D400AF4A85 /* PictureContentConfiguration.swift */,
+			);
+			path = PicturesViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,9 +251,13 @@
 				DA641C4C2767DA8A001223C8 /* LoginViewController.swift in Sources */,
 				DA641C482767DA8A001223C8 /* AppDelegate.swift in Sources */,
 				DADE0CE8276D04F600AF4A85 /* UIViewController+.swift in Sources */,
+				DADE0CF5276F19D400AF4A85 /* PictureContentConfiguration.swift in Sources */,
+				DADE0CF2276F19D400AF4A85 /* PictureContentView.swift in Sources */,
 				DADE0CEC276E0E7D00AF4A85 /* WebViewController.swift in Sources */,
 				DA641C4A2767DA8A001223C8 /* SceneDelegate.swift in Sources */,
-				DADE0CE6276CD33C00AF4A85 /* Credentials.swift in Sources */,
+				DADE0CF4276F19D400AF4A85 /* PicturesViewController.swift in Sources */,
+				DADE0CF3276F19D400AF4A85 /* PictureListCell.swift in Sources */,
+				DADE0CE6276CD33C00AF4A85 /* Models.swift in Sources */,
 				DACDA5192769E8640085D04E /* UIAlertController+.swift in Sources */,
 				DA641C5E2768823F001223C8 /* GreetingViewController.swift in Sources */,
 				DA641C632768ED22001223C8 /* UnderKeyboard.swift in Sources */,

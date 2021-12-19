@@ -18,7 +18,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Private vars
     
-    private var person: Person?
+    private var person: Person? // perhaps Person! would be more approppriate
     private let underKeyboardLayoutConstraint = UnderKeyboardLayoutConstraint()
     
     // MARK: - Lifecycle methods
@@ -37,17 +37,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if identifier == "loggedInSegue" {
             tryToLogin()
         }
-        return true
+        return super.shouldPerformSegue(withIdentifier: identifier, sender: sender)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let person = person else { return }
         if let greetingVC = segue.destination.allContentControllersOf(type: GreetingViewController.self).first {
-            greetingVC.userName = person?.name
-            greetingVC.avatarURL = person?.avatarURL
+            greetingVC.userName = person.name
+            greetingVC.bio = person.bio
+            greetingVC.avatarURL = person.avatarURL
         }
         if let projectsVC = segue.destination.allContentControllersOf(type: ProjectsViewController.self).first {
-            projectsVC.projecs = person?.projects
-            projectsVC.title = "Projects of \(person?.name ?? "person")"
+            projectsVC.projecs = person.projects
+            projectsVC.title = "Projects of \(person.name)"
+        }
+        if let picturesVC = segue.destination.allContentControllersOf(type: PicturesViewController.self).first {
+            picturesVC.pictures = (person.pictures)!
+            picturesVC.navigationController?.navigationBar.items = [UINavigationItem(title: "Pictures of \(person.name)")]
         }
     }
     

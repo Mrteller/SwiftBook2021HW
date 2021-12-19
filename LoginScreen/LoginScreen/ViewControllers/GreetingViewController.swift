@@ -14,14 +14,9 @@ class GreetingViewController: UIViewController {
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var userGreetingLabel: UILabel!
+    @IBOutlet weak var overViewLabel: UILabel!
     
     // MARK: - Public vars
-    
-    var userName: String? {
-        didSet {
-            userGreetingLabel?.text = userName
-        }
-    }
     
     var avatarURL: URL? {
         didSet {
@@ -29,6 +24,18 @@ class GreetingViewController: UIViewController {
             if view.window != nil { // if we're on screen
                 fetchImage()        // then fetch image
             }
+        }
+    }
+    
+    var userName: String? {
+        didSet {
+            userGreetingLabel?.text = userName
+        }
+    }
+    
+    var bio: String? {
+        didSet {
+            overViewLabel?.text = bio
         }
     }
     
@@ -42,7 +49,9 @@ class GreetingViewController: UIViewController {
         if userGreetingLabel.text != userName {
             userGreetingLabel.text = userName
         }
-        
+        if overViewLabel.text != bio {
+            overViewLabel.text = bio
+        }
         if avatarImageView?.image == nil { // about to appear on screen so, if needed:
             fetchImage()
         }
