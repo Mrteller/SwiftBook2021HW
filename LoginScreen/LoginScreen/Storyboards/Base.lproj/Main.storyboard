@@ -59,17 +59,17 @@
                                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleFootnote"/>
                                                 </buttonConfiguration>
                                                 <connections>
-                                                    <action selector="forgotLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dSn-W3-vDs"/>
+                                                    <action selector="forgotLoginOrPasswordButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hsG-1K-sBg"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgI-Lp-ysC">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgI-Lp-ysC">
                                                 <rect key="frame" x="151" y="22.666666666666686" width="125" height="28.333333333333329"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Forgot password?">
                                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleFootnote"/>
                                                 </buttonConfiguration>
                                                 <connections>
-                                                    <action selector="forgotLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F1c-W9-0KU"/>
+                                                    <action selector="forgotLoginOrPasswordButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HiJ-BP-Fms"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -205,7 +205,7 @@
                                 <rect key="frame" x="0.0" y="44.666666030883789" width="414" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nz6-uo-7wP" id="6tG-xo-53r">
-                                    <rect key="frame" x="0.0" y="0.0" width="383.66666666666669" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="385.33333333333331" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZGZ-7c-tiU">
