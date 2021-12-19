@@ -85,13 +85,6 @@ class GreetingViewController: UIViewController {
         }
     }
     
-//    private func greetUser(user name: String?, greeting: String = "Hello") -> String {
-//        if let name = name, !name.isEmpty {
-//            return "\(greeting), \(name)"
-//        } else {
-//            return greeting
-//        }
-//    }
 
 }
 

@@ -32,11 +32,9 @@ class PicturesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Create list layout
         let layoutConfig = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
         let listLayout = UICollectionViewCompositionalLayout.list(using: layoutConfig)
         
-        // Create collection view with list layout
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: listLayout)
         view.addSubview(collectionView)
         
@@ -49,34 +47,25 @@ class PicturesViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0.0),
         ])
         
-        // Create cell registration that define how data should be shown in a cell
         let cellRegistration = UICollectionView.CellRegistration<PictureListCell, PictureItem> { (cell, indexPath, item) in
             
-            // For custom cell, we just need to assign the data item to the cell.
-            // The custom cell's updateConfiguration(using:) method will assign the
-            // content configuration to the cell
             cell.item = item
             cell.indexPath = indexPath
-            
         }
         
-        // Define data source
         dataSource = UICollectionViewDiffableDataSource<Section, PictureItem>(collectionView: collectionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, identifier: PictureItem) -> UICollectionViewCell? in
             
-            // Dequeue reusable cell using cell registration (Reuse identifier no longer needed)
             let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
                                                                     for: indexPath,
                                                                     item: identifier)
             return cell
         }
         
-        // Create a snapshot that define the current state of data source's data
         snapshot = NSDiffableDataSourceSnapshot<Section, PictureItem>()
         snapshot.appendSections([.main])
         snapshot.appendItems(dataItems, toSection: .main)
         
-        // Display data on the collection view by applying the snapshot to data source
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 

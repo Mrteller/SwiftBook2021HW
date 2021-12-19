@@ -76,10 +76,6 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
     
     
-    // MARK: - @IBActions
-    
-    // MARK: - Public funcs
-    
     // MARK: - Private funcs
     
     private func fetchWebPage() {
