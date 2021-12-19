@@ -40,7 +40,10 @@ class ProjectsViewController: UITableViewController, UISplitViewControllerDelega
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "projectCell", for: indexPath)
+        cell.textLabel?.font = .preferredFont(forTextStyle: .headline)
         cell.textLabel?.text = projecs[indexPath.row].name
+        cell.detailTextLabel?.font = .preferredFont(forTextStyle: .caption1)
+        cell.detailTextLabel?.textColor = .link
         cell.detailTextLabel?.text = projecs[indexPath.row].htmlURL.absoluteString
         return cell
     }

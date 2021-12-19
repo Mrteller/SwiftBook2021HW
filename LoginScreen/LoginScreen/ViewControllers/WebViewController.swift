@@ -27,6 +27,11 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     
     // MARK: - Initializers
     
+    deinit {
+        webView?.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
+        webView?.removeObserver(self, forKeyPath: #keyPath(WKWebView.isLoading))
+    }
+    
     // MARK: - Lifecycle methods
     
     override func loadView() {

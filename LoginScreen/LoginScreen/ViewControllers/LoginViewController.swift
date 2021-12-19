@@ -47,6 +47,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         if let projectsVC = segue.destination.allContentControllersOf(type: ProjectsViewController.self).first {
             projectsVC.projecs = person?.projects
+            projectsVC.title = "Projects of \(person?.name ?? "person")"
         }
     }
     
