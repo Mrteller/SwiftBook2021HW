@@ -58,9 +58,7 @@ class ResultsViewController: UIViewController {
         }
 #endif
         
-        if let resultWithHigherstScore = resultsScore.map({ $0 })
-            .sorted(by: { $0.value > $1.value })
-            .first {
+        if let resultWithHigherstScore = resultsScore.sorted(by: { $0.value > $1.value }).first {
             guard let possiblePoints = totalPossiblePoints(for: resultWithHigherstScore.0) else { return }
             let percents = lrint((Double(resultWithHigherstScore.value) / Double(possiblePoints)) * 100)
             // Todo: use percents instead of points
