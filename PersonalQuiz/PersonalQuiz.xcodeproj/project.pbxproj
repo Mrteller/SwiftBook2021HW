@@ -34,7 +34,6 @@
 		DADE0CFE2771E39E00AF4A85 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		DADE0D012771E41700AF4A85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		DADE0D022771E47900AF4A85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
-		DADE0D032771E91400AF4A85 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = ru.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,7 +210,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				06D43678276BB69E003B4545 /* Base */,
-				DADE0D032771E91400AF4A85 /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

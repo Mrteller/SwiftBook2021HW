@@ -2,22 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>%d point(s)</key>
+	<key>%d percent(s)</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@points@</string>
-		<key>points</key>
+		<string>%#@percents@</string>
+		<key>percents</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d point</string>
+			<string>%d percent</string>
 			<key>zero</key>
-			<string>no points</string>
+			<string>no percents</string>
 			<key>other</key>
-			<string>%d points</string>
+			<string>%d percents</string>
 		</dict>
 	</dict>
 </dict>
