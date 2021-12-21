@@ -52,7 +52,7 @@ class ResultsViewController: UIViewController {
         if let resultWithHigherstScore = resultsScore.map({ ($0.key, $0.value) })
             .sorted(by: { $0.1 > $1.1 })
             .first {
-            // Todo: use percents insteat of points
+            // Todo: use percents instead of points
             resultLabel.text = "Вы \(resultWithHigherstScore.0.rawValue)\n на " + String(format: NSLocalizedString("%d point(s)", comment: ""), resultWithHigherstScore.1)
             resultDescriptionLabel.text = resultWithHigherstScore.0.definition
         }
