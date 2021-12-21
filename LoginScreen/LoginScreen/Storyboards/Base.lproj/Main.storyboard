@@ -205,7 +205,7 @@
                                 <rect key="frame" x="0.0" y="44.666666030883789" width="414" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nz6-uo-7wP" id="6tG-xo-53r">
-                                    <rect key="frame" x="0.0" y="0.0" width="385.33333333333331" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383.66666666666669" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZGZ-7c-tiU">
@@ -364,7 +364,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="es2-2e-qNp"/>
+        <segue reference="eWc-s3-DP3"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="list.bullet.rectangle.fill" catalog="system" width="128" height="93"/>

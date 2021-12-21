@@ -304,16 +304,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GM2-Kd-ueG">
-                                <rect key="frame" x="20" y="270.5" width="335" height="126.5"/>
+                                <rect key="frame" x="20" y="269" width="335" height="129"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вы - 🐶!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BwF-SW-yds">
-                                        <rect key="frame" x="84" y="0.0" width="167.5" height="57.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="48"/>
+                                        <rect key="frame" x="80.5" y="0.0" width="174.5" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вам нравится быть с друзьями, Вы окружаете себя людьми, которые вам нравятся и всегда готовы помочь" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quB-aO-ZQk">
-                                        <rect key="frame" x="0.0" y="65.5" width="335" height="61"/>
+                                        <rect key="frame" x="0.0" y="68" width="335" height="61"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
