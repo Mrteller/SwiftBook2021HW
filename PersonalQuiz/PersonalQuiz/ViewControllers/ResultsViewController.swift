@@ -58,14 +58,14 @@ class ResultsViewController: UIViewController {
         }
 #endif
         
-        if let resultWithHigherstScore = resultsScore.map({ ($0.key, $0.value) })
-            .sorted(by: { $0.1 > $1.1 })
+        if let resultWithHigherstScore = resultsScore.map({ $0 })
+            .sorted(by: { $0.value > $1.value })
             .first {
             guard let possiblePoints = totalPossiblePoints(for: resultWithHigherstScore.0) else { return }
-            let percents = lrint((Double(resultWithHigherstScore.1) / Double(possiblePoints)) * 100)
+            let percents = lrint((Double(resultWithHigherstScore.value) / Double(possiblePoints)) * 100)
             // Todo: use percents instead of points
-            resultLabel.text = "Вы \(resultWithHigherstScore.0.rawValue)\n на \(String(format: NSLocalizedString("%d percent(s)", comment: ""), percents))"
-            resultDescriptionLabel.text = resultWithHigherstScore.0.definition
+            resultLabel.text = "Вы \(resultWithHigherstScore.key.rawValue)\n на \(String(format: NSLocalizedString("%d percent(s)", comment: ""), percents))"
+            resultDescriptionLabel.text = resultWithHigherstScore.key.definition
         }
     }
     
