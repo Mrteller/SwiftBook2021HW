@@ -52,13 +52,13 @@ class ResultsViewController: UIViewController {
         resultsScore.forEach{ print("\($0.key) score is \($0.value)")}
         
         // Alernative way to calculate the highest score answer
-        let cs = NSCountedSet(array: answers.map(\.type))
-        if let altResultWithHigherstScore = cs.allObjects.map({ ($0 as! AnimalType, cs.count(for: $0)) }).sorted(by: { $0.1 > $1.1 }).first {
+        let countedSet = NSCountedSet(array: answers.map(\.type))
+        if let altResultWithHigherstScore = countedSet.allObjects.map({ ($0 as! AnimalType, countedSet.count(for: $0)) }).sorted(by: { $0.1 > $1.1 }).first {
             print("altResultWithHigherstScore (\(altResultWithHigherstScore.0.rawValue), \(altResultWithHigherstScore.1))")
         }
 #endif
         
-        if let resultWithHigherstScore = resultsScore.sorted(by: { $0.value > $1.value }).first {
+        if let resultWithHigherstScore = resultsScore.max(by: { $0.value < $1.value }) {
             guard let possiblePoints = totalPossiblePoints(for: resultWithHigherstScore.0) else { return }
             let percents = lrint((Double(resultWithHigherstScore.value) / Double(possiblePoints)) * 100)
             // Todo: use percents instead of points
