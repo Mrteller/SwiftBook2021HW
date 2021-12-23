@@ -55,6 +55,8 @@ class GreetingViewController: UIViewController {
         if avatarImageView?.image == nil { // about to appear on screen so, if needed:
             fetchImage()
         }
+        avatarImageView.layer.cornerRadius = 30
+        avatarImageView.clipsToBounds = true
     }
 
     // MARK: - Private funcs
