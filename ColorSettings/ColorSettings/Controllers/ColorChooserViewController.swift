@@ -23,6 +23,10 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var greenValueLabel: UILabel!
     @IBOutlet weak var blueValueLabel: UILabel!
     
+    @IBOutlet weak var redValueTextField: UITextField!
+    @IBOutlet weak var greenValueTextField: UITextField!
+    @IBOutlet weak var blueValueTextField: UITextField!
+    
     @IBOutlet weak var redSlider: UISlider!
     @IBOutlet weak var greenSlider: UISlider!
     @IBOutlet weak var blueSlider: UISlider!
@@ -61,11 +65,17 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setDynamicFontSizeAndConstraints()
+        view.layoutSubviews()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         titleLabel.applyGradientWith(colors: [.red, .orange])
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super .touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
     
 //    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -82,6 +92,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     // MARK: - @IBActions
     
     @IBAction func colorspaceSegmentedControlValueChanged() {
+        updateSliders(from: hexTextField.text ?? "")
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             hsbStackView.isHidden = true
@@ -98,45 +109,69 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
         
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            (r, g, b) = (CGFloat(redSlider.value), CGFloat(greenSlider.value), CGFloat(blueSlider.value))
-            hexTextField.text = UIColor.toHex(r: r, g: g, b: b)
+            (red, green, blue) = (CGFloat(redSlider.value), CGFloat(greenSlider.value), CGFloat(blueSlider.value))
+            hexTextField.text = UIColor.toHex(r: red, g: green, b: blue)
         case 1:
-            (h, s, br) = (CGFloat(hueSlider.value), CGFloat(saturationSlider.value), CGFloat(brightnesSlider.value))
-            hexTextField.text = UIColor.toHex(h: h, s: s, b: br)
+            (hue, saturation, brightness) = (CGFloat(hueSlider.value), CGFloat(saturationSlider.value), CGFloat(brightnesSlider.value))
+            hexTextField.text = UIColor.toHex(h: hue, s: saturation, b: brightness)
         default:
             break
         }
         
         updateColorDisplay(from: hexTextField.text)
-        updateSliders(from: hexTextField.text ?? "") // setting slider value does not fire `rgbSliderValueChanged()`, so it is OK
+        //updateSliders(from: hexTextField.text ?? "") // setting slider value does not fire `rgbSliderValueChanged()`, so it is OK
     }
     
     // MARK: - UITextFieldDelegate
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         print(string)
-        var containsInadmissible = false
-        let cs = CharacterSet(charactersIn: "0"..."9").union(CharacterSet(charactersIn: "a"..."f")).union(CharacterSet(charactersIn: "A"..."F")).union(CharacterSet(charactersIn: "#"))
         
-        containsInadmissible = string.contains { ch in !cs.contains(ch.unicodeScalars.first!) }
-        if var text = textField.text, let range = Range(range, in: text) {
-            text.replaceSubrange(range, with: string)
-            if updateColorDisplay(from: text) {
-                textField.textColor = .label
-            } else {
-                textField.textColor = .systemGray
+        switch textField {
+        case hexTextField:
+            var containsInadmissible = false
+            let cs = CharacterSet(charactersIn: "0"..."9").union(CharacterSet(charactersIn: "a"..."f")).union(CharacterSet(charactersIn: "A"..."F")).union(CharacterSet(charactersIn: "#"))
+            
+            containsInadmissible = string.contains { ch in !cs.contains(ch.unicodeScalars.first!) }
+            if var text = textField.text, let range = Range(range, in: text) {
+                text.replaceSubrange(range, with: string)
+                if updateColorDisplay(from: text) {
+                    textField.textColor = .label
+                } else {
+                    textField.textColor = .systemGray
+                }
+                updateSliders(from: text)
             }
-            updateSliders(from: text)
+            
+            return !containsInadmissible
+            
+        case redValueTextField, greenValueTextField, blueValueTextField:
+            //return colorValueChanged(by: textField)
+            return true
+        default:
+            return true
         }
-        
-        return !containsInadmissible
+
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if Set([6, 8]).contains(textField.text?.replacingOccurrences(of: "#", with: "").count) {
-            textField.resignFirstResponder()
+        
+        switch textField {
+        case hexTextField:
+            if Set([6, 8]).contains(textField.text?.replacingOccurrences(of: "#", with: "").count) {
+                textField.resignFirstResponder()
+                return true
+            }
+             return false
+        case redValueTextField, greenValueTextField, blueValueTextField:
+            return colorValueChanged(by: textField)
+        default:
+            return true
         }
-        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        colorValueChanged(by: textField)
     }
     
     // MARK: - Private vars
@@ -146,8 +181,13 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     private lazy var segmentedControlFontSize: CGFloat = 22 * screenMultiplier
     private lazy var hexTVFontSize: CGFloat = 24 * screenMultiplier
     private lazy var labelFontSize: CGFloat = 20 * screenMultiplier
-    private var r: CGFloat = 0.5; private var g: CGFloat = 0.5; private var b: CGFloat = 0.5; private var a: CGFloat = 1
-    private var h: CGFloat = 0.5; private var s: CGFloat = 0.5; private var br: CGFloat = 0.5;
+    private var red: CGFloat = 0.5;
+    private var green: CGFloat = 0.5;
+    private var blue: CGFloat = 0.5;
+    private var alpha: CGFloat = 1
+    private var hue: CGFloat = 0.5;
+    private var saturation: CGFloat = 0.5;
+    private var brightness: CGFloat = 0.5;
     private lazy var segmentedControlMinHeightConstraint = NSLayoutConstraint(item: segmentedControl!, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .height, multiplier: 1, constant: segmentedControlFontSize)
     private lazy var rgbLabelMinWidthConstraint = NSLayoutConstraint(item: redValueLabel!, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .width, multiplier: 1, constant: redValueLabel.font.xHeight * 3)
     private lazy var hsbLabelMinWidthConstraint = NSLayoutConstraint(item: hueValueLabel!, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .width, multiplier: 1, constant: hueValueLabel.font.xHeight * 3)
@@ -158,6 +198,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     private func updateColorDisplay(from hex: String?) -> Bool {
         if let hex = hex, let color = UIColor(hex: hex) {
             colorDisplay.backgroundColor = color
+            colorDisplay.startShimmering()
             return true
         } else {
             colorDisplay.backgroundColor = .clear
@@ -165,17 +206,17 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    private func updateSliders(from hex: String) {
-        if let color = UIColor(hex: hex) {
-            color.getRed(&r, green: &g, blue: &b, alpha: &a)
-            (redSlider.value, greenSlider.value, blueSlider.value) = (Float(r), Float(g), Float(b))
+    private func updateSliders(from hex: String?) {
+        if let hex = hex, let color = UIColor(hex: hex) {
+            color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+            (redSlider.value, greenSlider.value, blueSlider.value) = (Float(red), Float(green), Float(blue))
             [redSlider, greenSlider, blueSlider].forEach{ $0?.isEnabled = true }
             redValueLabel.text = redSlider.value.fratcionDigitis(2)
             greenValueLabel.text = greenSlider.value.fratcionDigitis(2)
             blueValueLabel.text = blueSlider.value.fratcionDigitis(2)
             
-            color.getHue(&h, saturation: &s, brightness: &br, alpha: &a)
-            (hueSlider.value, saturationSlider.value, brightnesSlider.value) = (Float(h), Float(s), Float(br))
+            color.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+            (hueSlider.value, saturationSlider.value, brightnesSlider.value) = (Float(hue), Float(saturation), Float(brightness))
             [hueSlider, greenSlider, brightnesSlider].forEach{ $0?.isEnabled = true }
             hueValueLabel.text = hueSlider.value.fratcionDigitis(2)
             saturationValueLabel.text = saturationSlider.value.fratcionDigitis(2)
@@ -188,9 +229,22 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
             [hueSlider, saturationSlider, brightnesSlider].forEach{ $0?.isEnabled = false }
             [hueValueLabel, saturationValueLabel, brightnesValueLabel].forEach{ $0?.text = "?"}
         }
-        
-           colorDisplay.startShimmering()
-
+    }
+    
+    
+    
+    @discardableResult
+    private func colorValueChanged(by textField: UITextField) -> Bool {
+        guard let correspondingSlider = view.allSubViewsOf(type: UISlider.self).first(where: { $0.tag == textField.tag }) else { return false }
+        if let value = Float(textField.text ?? "0") {
+            textField.text = value.fratcionDigitis(2)
+            correspondingSlider.value = value.clamp(lowerBound: 0, upperBound: 1)
+            rgbSliderValueChanged(redSlider) // TODO: refactor
+            return true
+        } else {
+            textField.text = correspondingSlider.value.fratcionDigitis(2)
+        }
+        return false
     }
     
     private func adjustFonts(`in` view: UIView) {
@@ -200,7 +254,11 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
                 label.font = fontMetrics.scaledFont(for: label.font.withSize(labelFontSize +  20 * CGFloat(label.tag)))
                 label.layer.contentsGravity = .center
             } else if let textField = view as? UITextField {
-                textField.font = fontMetrics.scaledFont(for: textField.font?.withSize(hexTVFontSize) ?? .systemFont(ofSize: hexTVFontSize))
+                if textField == hexTextField {
+                    textField.font = fontMetrics.scaledFont(for: textField.font?.withSize(hexTVFontSize) ?? .systemFont(ofSize: hexTVFontSize))
+                } else {
+                    textField.font = fontMetrics.scaledFont(for: (textField.font?.withSize(labelFontSize)) ?? .systemFont(ofSize: labelFontSize))
+                }
             } else {
                 // Recursive loop through subview
                 adjustFonts(in: view)
@@ -210,8 +268,12 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     
     private func adjustConstraints() {
         
-        rgbLabelMinWidthConstraint.constant = "0.00".size(withAttributes: [.font : redValueLabel.font ?? .systemFont(ofSize: labelFontSize)]).width // TODO: proper calculation
-        hsbLabelMinWidthConstraint.constant = "0.00".size(withAttributes: [.font : hueValueLabel.font ?? .systemFont(ofSize: labelFontSize)]).width
+        let minWidthForLabel = "0.00".size(withAttributes: [.font : redValueLabel.font ?? .systemFont(ofSize: labelFontSize)]).width // TODO: proper calculation
+
+        redValueTextField.widthAnchor.constraint(equalToConstant: minWidthForLabel).isActive = true
+
+        rgbLabelMinWidthConstraint.constant = minWidthForLabel
+        hsbLabelMinWidthConstraint.constant = minWidthForLabel
         
         let segmentedControlFont = fontMetrics.scaledFont(for: UIFont.systemFont(ofSize: segmentedControlFontSize))
         segmentedControl.setTitleTextAttributes([.font : segmentedControlFont], for: .normal)
@@ -231,6 +293,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
 extension BinaryFloatingPoint {
     func fratcionDigitis(_ max: Int, _ min: Int = 0, roundingMode: NumberFormatter.RoundingMode = .halfEven) -> String {
         let number = NumberFormatter()
+        number.decimalSeparator = "." // TODO: handle ","
         number.roundingMode = roundingMode
         number.maximumFractionDigits = max
         number.minimumFractionDigits = min
