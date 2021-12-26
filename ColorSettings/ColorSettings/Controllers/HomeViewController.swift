@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ColorizedProtocol{
+protocol ColorizedProtocol: AnyObject {
     func setBackgroundColor(_ color: UIColor)
 }
 
