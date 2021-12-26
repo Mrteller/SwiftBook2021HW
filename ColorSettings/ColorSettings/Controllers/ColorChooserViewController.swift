@@ -191,7 +191,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     
     var color = CIColor(color: UIColor.systemBackground)
     
-    var delegate: ColorizedProtocol?
+    weak var delegate: ColorizedProtocol?
     
     // MARK: - Private vars
     
