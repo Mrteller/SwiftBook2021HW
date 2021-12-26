@@ -60,12 +60,16 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
         hexTextField.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(setDynamicFontSizeAndConstraints), name: UIContentSizeCategory.didChangeNotification, object: nil)
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setDynamicFontSizeAndConstraints()
         view.layoutSubviews()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -76,6 +80,8 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         delegate?.setBackgroundColor(colorDisplay.backgroundColor ?? .systemBackground)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -302,6 +308,24 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     @objc private func setDynamicFontSizeAndConstraints() {
         adjustFonts(in: view)
         adjustConstraints()
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification?) {
+        if let keyboardSize = (notification?.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size {
+            UIView.animate(withDuration: 0.3, animations: {
+                var f = self.view.frame
+                f.origin.y = -keyboardSize.height
+                self.view.frame = f
+            })
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification?) {
+        UIView.animate(withDuration: 0.3, animations: {
+            var f = self.view.frame
+            f.origin.y = 0.0
+            self.view.frame = f
+        })
     }
     
 }
