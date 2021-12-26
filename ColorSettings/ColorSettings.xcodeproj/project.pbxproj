@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DA3AF09C2776514200467DF0 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3AF09B2776514200467DF0 /* UIView+.swift */; };
+		DA3AF09E27784D2400467DF0 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3AF09D27784D2400467DF0 /* UITextField+.swift */; };
 		DA6D5C4B2775088500228D0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6D5C4A2775088500228D0C /* AppDelegate.swift */; };
 		DA6D5C4D2775088500228D0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6D5C4C2775088500228D0C /* SceneDelegate.swift */; };
 		DA6D5C4F2775088500228D0C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6D5C4E2775088500228D0C /* HomeViewController.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		DA3AF09B2776514200467DF0 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		DA3AF09D27784D2400467DF0 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		DA6D5C472775088500228D0C /* ColorSettings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorSettings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6D5C4A2775088500228D0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA6D5C4C2775088500228D0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				DA6D5C6127750B3000228D0C /* UILabel+TextGradient.swift */,
 				DA6D5C6327750B3000228D0C /* UIView+Shimmering.swift */,
 				DA3AF09B2776514200467DF0 /* UIView+.swift */,
+				DA3AF09D27784D2400467DF0 /* UITextField+.swift */,
 			);
 			path = Auxillary;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA6D5C6627750B3000228D0C /* Comparable+.swift in Sources */,
+				DA3AF09E27784D2400467DF0 /* UITextField+.swift in Sources */,
 				DA6D5C6727750B3000228D0C /* UIView+Shimmering.swift in Sources */,
 				DA6D5C5F27750AFE00228D0C /* ColorChooserViewController.swift in Sources */,
 				DA6D5C4F2775088500228D0C /* HomeViewController.swift in Sources */,
