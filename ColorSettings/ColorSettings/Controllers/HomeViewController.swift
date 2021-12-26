@@ -30,6 +30,7 @@ class HomeViewController: UIViewController, ColorizedProtocol {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let colorChooserVC = segue.destination as? ColorChooserViewController {
+            colorChooserVC.color = CIColor(color: view.backgroundColor ?? .systemBackground)
             colorChooserVC.delegate = self
         }
     }

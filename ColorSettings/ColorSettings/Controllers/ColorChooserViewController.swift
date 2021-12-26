@@ -47,21 +47,14 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        updateSliders(from: hexTextField.text ?? "")
-        
         segmentedControl.addConstraint(segmentedControlMinHeightConstraint)
-
         redValueLabel.addConstraint(rgbLabelMinWidthConstraint)
         hueValueLabel.addConstraint(hsbLabelMinWidthConstraint)
-        
-        colorDisplay.backgroundColor = UIColor(displayP3Red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
-        
         hexTextField.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(setDynamicFontSizeAndConstraints), name: UIContentSizeCategory.didChangeNotification, object: nil)
-        
-        
+        colorDisplay.backgroundColor = UIColor(ciColor: color)
+        hexTextField.text = UIColor.toHex(r: color.red, g: color.green, b: color.blue)
+        updateSliders(from: hexTextField.text)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,6 +63,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
         view.layoutSubviews()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setDynamicFontSizeAndConstraints), name: UIContentSizeCategory.didChangeNotification, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -82,10 +76,11 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
         delegate?.setBackgroundColor(colorDisplay.backgroundColor ?? .systemBackground)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIContentSizeCategory.didChangeNotification, object: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super .touchesBegan(touches, with: event)
+        super.touchesBegan(touches, with: event)
         view.endEditing(true)
     }
     
@@ -103,7 +98,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     // MARK: - @IBActions
     
     @IBAction func colorspaceSegmentedControlValueChanged() {
-        updateSliders(from: hexTextField.text ?? "")
+        updateSliders(from: hexTextField.text)
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             hsbStackView.isHidden = true
@@ -181,7 +176,8 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
             }
              return false
         case redValueTextField, greenValueTextField, blueValueTextField:
-            return colorValueChanged(by: textField)
+            //return colorValueChanged(by: textField)
+            return true
         default:
             return true
         }
@@ -192,6 +188,8 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Public vars
+    
+    var color = CIColor(color: UIColor.systemBackground)
     
     var delegate: ColorizedProtocol?
     
@@ -260,15 +258,22 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     @discardableResult
     private func colorValueChanged(by textField: UITextField) -> Bool {
         guard let correspondingSlider = view.allSubViewsOf(type: UISlider.self).first(where: { $0.tag == textField.tag }) else { return false }
-        if let value = Float(textField.text ?? "0") {
+        if let value = Float(textField.text ?? "0"), (value >= 0) && (value <= 1)  {
             textField.text = value.fratcionDigitis(2)
-            correspondingSlider.value = value.clamp(lowerBound: 0, upperBound: 1)
+            correspondingSlider.value = value //.clamp(lowerBound: 0, upperBound: 1)
             rgbSliderValueChanged(redSlider) // TODO: refactor
             return true
         } else {
             textField.text = correspondingSlider.value.fratcionDigitis(2)
+            showAlert(title: "Wrong input", message: "Parameter must be between 0 and 1")
         }
         return false
+    }
+    
+    private func showAlert(title: String?, message: String?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
     
     private func adjustFonts(`in` view: UIView) {
@@ -313,18 +318,18 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     @objc private func keyboardWillShow(_ notification: Notification?) {
         if let keyboardSize = (notification?.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size {
             UIView.animate(withDuration: 0.3, animations: {
-                var f = self.view.frame
-                f.origin.y = -keyboardSize.height
-                self.view.frame = f
+                var frame = self.view.frame
+                frame.origin.y = -keyboardSize.height
+                self.view.frame = frame
             })
         }
     }
     
     @objc private func keyboardWillHide(_ notification: Notification?) {
         UIView.animate(withDuration: 0.3, animations: {
-            var f = self.view.frame
-            f.origin.y = 0.0
-            self.view.frame = f
+            var frame = self.view.frame
+            frame.origin.y = 0.0
+            self.view.frame = frame
         })
     }
     
