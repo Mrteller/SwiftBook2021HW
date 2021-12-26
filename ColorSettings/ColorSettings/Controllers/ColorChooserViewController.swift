@@ -73,6 +73,11 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
         titleLabel.applyGradientWith(colors: [.red, .orange])
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        delegate?.setBackgroundColor(colorDisplay.backgroundColor ?? .systemBackground)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super .touchesBegan(touches, with: event)
         view.endEditing(true)
@@ -119,7 +124,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
         }
         
         updateColorDisplay(from: hexTextField.text)
-        //updateSliders(from: hexTextField.text ?? "") // setting slider value does not fire `rgbSliderValueChanged()`, so it is OK
+        updateSliders(from: hexTextField.text) // setting slider value does not fire `rgbSliderValueChanged()`, so it is OK
     }
     
     // MARK: - UITextFieldDelegate
@@ -146,8 +151,14 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
             return !containsInadmissible
             
         case redValueTextField, greenValueTextField, blueValueTextField:
-            //return colorValueChanged(by: textField)
-            return true
+            var containsInadmissible = false
+            let cs = CharacterSet(charactersIn: "0"..."9").union(CharacterSet(charactersIn: ".,"))
+            containsInadmissible = string.contains { ch in !cs.contains(ch.unicodeScalars.first!) }
+            if var text = textField.text, let range = Range(range, in: text) {
+                text.replaceSubrange(range, with: string)
+                textField.text = text.replacingOccurrences(of: ",", with: ".")
+            }
+            return containsInadmissible
         default:
             return true
         }
@@ -173,6 +184,10 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         colorValueChanged(by: textField)
     }
+    
+    // MARK: - Public vars
+    
+    var delegate: ColorizedProtocol?
     
     // MARK: - Private vars
     
@@ -214,6 +229,10 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
             redValueLabel.text = redSlider.value.fratcionDigitis(2)
             greenValueLabel.text = greenSlider.value.fratcionDigitis(2)
             blueValueLabel.text = blueSlider.value.fratcionDigitis(2)
+            redValueTextField.text = redSlider.value.fratcionDigitis(2)
+            greenValueTextField.text = greenSlider.value.fratcionDigitis(2)
+            blueValueTextField.text = blueSlider.value.fratcionDigitis(2)
+            
             
             color.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
             (hueSlider.value, saturationSlider.value, brightnesSlider.value) = (Float(hue), Float(saturation), Float(brightness))
@@ -230,7 +249,6 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
             [hueValueLabel, saturationValueLabel, brightnesValueLabel].forEach{ $0?.text = "?"}
         }
     }
-    
     
     
     @discardableResult
@@ -268,7 +286,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     
     private func adjustConstraints() {
         
-        let minWidthForLabel = "0.00".size(withAttributes: [.font : redValueLabel.font ?? .systemFont(ofSize: labelFontSize)]).width // TODO: proper calculation
+        let minWidthForLabel = "0.000".size(withAttributes: [.font : redValueLabel.font ?? .systemFont(ofSize: labelFontSize)]).width // TODO: proper calculation
 
         redValueTextField.widthAnchor.constraint(equalToConstant: minWidthForLabel).isActive = true
 

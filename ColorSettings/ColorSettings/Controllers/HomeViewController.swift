@@ -28,6 +28,12 @@ class HomeViewController: UIViewController, ColorizedProtocol {
         // Do any additional setup after loading the view.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let colorChooserVC = segue.destination as? ColorChooserViewController {
+            colorChooserVC.delegate = self
+        }
+    }
+    
     // MARK: - @IBActions
     
     // MARK: - Public funcs
