@@ -319,7 +319,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
         if let keyboardSize = (notification?.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size {
             UIView.animate(withDuration: 0.3, animations: {
                 var frame = self.view.frame
-                frame.origin.y = -keyboardSize.height
+                frame.origin.y = -keyboardSize.height / 2
                 self.view.frame = frame
             })
         }
