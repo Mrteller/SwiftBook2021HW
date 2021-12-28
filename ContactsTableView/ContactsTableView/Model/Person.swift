@@ -6,6 +6,7 @@
 //
 
 struct Person {
+    
     var name: String
     var surname: String
     var email: String
