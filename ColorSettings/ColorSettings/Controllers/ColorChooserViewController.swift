@@ -141,11 +141,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
             containsInadmissible = string.contains { ch in !cs.contains(ch.unicodeScalars.first!) }
             if var text = textField.text, let range = Range(range, in: text) {
                 text.replaceSubrange(range, with: string)
-                if updateColorDisplay(from: text) {
-                    textField.textColor = .label
-                } else {
-                    textField.textColor = .systemGray
-                }
+                updateColorDisplay(from: text)
                 updateSliders(from: text)
             }
             
@@ -159,7 +155,7 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
                 text.replaceSubrange(range, with: string)
                 textField.text = text.replacingOccurrences(of: ",", with: ".")
             }
-            return containsInadmissible
+            return !containsInadmissible
         default:
             return true
         }
@@ -217,10 +213,12 @@ class ColorChooserViewController: UIViewController, UITextFieldDelegate {
     private func updateColorDisplay(from hex: String?) -> Bool {
         if let hex = hex, let color = UIColor(hex: hex) {
             colorDisplay.backgroundColor = color
+            hexTextField.textColor = .label
             colorDisplay.startShimmering()
             return true
         } else {
             colorDisplay.backgroundColor = .clear
+            hexTextField.textColor = .systemGray
             return false
         }
     }
