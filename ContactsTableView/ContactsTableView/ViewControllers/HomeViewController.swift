@@ -11,19 +11,23 @@ class HomeViewController: UITabBarController {
     
     // MARK: - Private vars
     
-    private var persons = [Person]()
+    private var persons = Person.randomPersons()
     
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        persons = Person.randomPersons()
-        // TODO: refactor with `firstContentControllerOf<T : UIViewController>(type : T.Type)`
-        if let nameController = (viewControllers?[0] as? UINavigationController)?.viewControllers.first as? NamesViewController {
+        loadDataIntoControllers()
+    }
+    
+    // MARK: - Private funcs
+    
+    private func loadDataIntoControllers() {
+        if let nameController = firstContentControllerOf(type: NamesViewController.self)  {
             nameController.persons = persons
             // TODO: pass a clousure to update the "source of truth" `persons` here
         }
-        if let contactsController = (viewControllers?[1] as? UINavigationController)?.viewControllers.first as? ContactsViewController {
+        if let contactsController = firstContentControllerOf(type: ContactsViewController.self)  {
             contactsController.persons = persons
         }
     }
