@@ -64,7 +64,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eek-wp-eT4" customClass="SpringButton" customModule="Spring">
-                                <rect key="frame" x="174.5" y="792" width="65" height="29"/>
+                                <rect key="frame" x="174.5" y="762" width="65" height="29"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -73,15 +73,27 @@
                                     <action selector="springButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="7ia-77-6VG"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dn-4Y-zXU" customClass="SpringButton" customModule="Spring">
+                                <rect key="frame" x="150.5" y="833" width="113" height="29"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Chain Animations"/>
+                                <connections>
+                                    <action selector="chainAnimationsButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mqp-5H-7Pf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="3dn-4Y-zXU" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="3aZ-qF-AVe"/>
                             <constraint firstItem="AJ4-Xj-ebr" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.7" id="FAx-Zo-wJj"/>
                             <constraint firstItem="AJ4-Xj-ebr" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="TPO-eo-x9P"/>
                             <constraint firstItem="AJ4-Xj-ebr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kli-Pw-Wgh"/>
                             <constraint firstItem="eek-wp-eT4" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="pQD-Oe-Tyh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="eek-wp-eT4" secondAttribute="bottom" multiplier="1.05" id="qFj-Mn-quQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="eek-wp-eT4" secondAttribute="bottom" multiplier="1.09" id="qFj-Mn-quQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3dn-4Y-zXU" secondAttribute="bottom" id="wRW-Bb-aI7"/>
                         </constraints>
                     </view>
                     <connections>

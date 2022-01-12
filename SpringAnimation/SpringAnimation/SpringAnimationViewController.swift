@@ -29,7 +29,19 @@ class SpringAnimationViewController: UIViewController {
     
     @IBAction func springButtonPressed() {
         setOptions()
+        updateSpringView() { [weak self] _ in
+            self?.springView.animate()
+        }
+    }
+    
+    @IBAction func chainAnimationsButtonPressed() {
+        setOptions()
         updateSpringView()
+        springView.animateToNext { [weak self] in
+            self?.setOptions()
+            self?.updateSpringView()
+            self?.springView.animateTo()
+        }
     }
     
     // MARK: - Private funcs
@@ -51,20 +63,20 @@ class SpringAnimationViewController: UIViewController {
         springView.curve = currentCurve.switchToNextLooped().rawValue
     }
     
-    func updateSpringView() {
+    func updateSpringView(completion: ((Bool) -> Void)? = nil) {
         springButton.setTitle("Animation " + springView.animation, for: .normal)
         UIView.transition(with: springView,
                           duration: 0.8,
-                          options: .transitionCrossDissolve) { [weak self] in
+                          options: .transitionCrossDissolve,
+                          animations: { [weak self] in
             guard let self = self else { return }
             self.forceLabel.text = "Force: " + self.springView.force.fractionDigits(2)
             self.durationLabel.text = "Duration: " + self.springView.duration.fractionDigits(2)
             self.delayLabel.text = "Delay: " + self.springView.delay.fractionDigits(2)
             self.dampingLabel.text = "Damping: " + self.springView.damping.fractionDigits(2)
             self.velocityLabel.text = "Velocity: " + self.springView.velocity.fractionDigits(2)
-        } completion: { [weak self] _ in
-            self?.springView.animate()
-        }
+        },
+    completion: completion)
     }
 
 }
