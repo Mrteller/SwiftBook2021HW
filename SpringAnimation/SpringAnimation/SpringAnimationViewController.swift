@@ -14,29 +14,23 @@ class SpringAnimationViewController: UIViewController {
     @IBOutlet weak var springView: SpringView!
     @IBOutlet weak var springButton: SpringButton!
     
-    
-    
-    // MARK: - Public vars
+    @IBOutlet weak var forceLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var delayLabel: UILabel!
+    @IBOutlet weak var dampingLabel: UILabel!
+    @IBOutlet weak var velocityLabel: UILabel!
     
     // MARK: - Private vars
     
     private var currentAnimation = Spring.AnimationPreset.fadeIn
     private var currentCurve = Spring.AnimationCurve.easeIn
     
-    // MARK: - Initializers
-    
-    // MARK: - Lifecycle methods
-    
     // MARK: - @IBActions
     
     @IBAction func springButtonPressed() {
-        
         setOptions()
-        springView.animate()
-        
+        updateSpringView()
     }
-    
-    // MARK: - Public funcs
     
     // MARK: - Private funcs
 
@@ -55,6 +49,22 @@ class SpringAnimationViewController: UIViewController {
         
         springView.animation = currentAnimation.switchToNextLooped().rawValue
         springView.curve = currentCurve.switchToNextLooped().rawValue
+    }
+    
+    func updateSpringView() {
+        springButton.setTitle("Animation " + springView.animation, for: .normal)
+        UIView.transition(with: springView,
+                          duration: 0.8,
+                          options: .transitionCrossDissolve) { [weak self] in
+            guard let self = self else { return }
+            self.forceLabel.text = "Force: " + self.springView.force.fractionDigits(2)
+            self.durationLabel.text = "Duration: " + self.springView.duration.fractionDigits(2)
+            self.delayLabel.text = "Delay: " + self.springView.delay.fractionDigits(2)
+            self.dampingLabel.text = "Damping: " + self.springView.damping.fractionDigits(2)
+            self.velocityLabel.text = "Velocity: " + self.springView.velocity.fractionDigits(2)
+        } completion: { [weak self] _ in
+            self?.springView.animate()
+        }
     }
 
 }
