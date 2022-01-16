@@ -15,9 +15,8 @@ final class MovieStore {
     
     // MARK: - Private vars
     
-    private let apiKey = "1d9b898a212ea52e283351e521e17871" //"API_KEY"
+    private let apiKey = "1d9b898a212ea52e283351e521e17871"
     private let baseAPIURL = "https://api.themoviedb.org/3"
-    private let urlSession = URLSession.shared
     
     private let jsonDecoder: JSONDecoder = {
         let jsonDecoder = JSONDecoder()
@@ -55,6 +54,7 @@ final class MovieStore {
                 guard let httpResponse = response as? HTTPURLResponse,
                       200...299 ~= httpResponse.statusCode,
                       let data = data else {
+                          // TODO: Process `httpResponse.statusCode`
                           completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Bad HTTP Response"])))
                           return
                       }
