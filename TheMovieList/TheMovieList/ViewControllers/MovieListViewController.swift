@@ -26,7 +26,7 @@ final class MovieListViewController: UITableViewController {
         super.viewDidLoad()
         title = "Movies"
         setupTableView()
-        fetchMovies()
+        fetchMovies2()
     }
     
     // MARK: - Private funcs
@@ -42,6 +42,19 @@ final class MovieListViewController: UITableViewController {
             }
             self?.activityIndicator.stopAnimating()
         }
+    }
+    
+    private func fetchMovies2() {
+        activityIndicator.startAnimating()
+        guard let url = MovieStore.shared.generateURL(with: .upcoming) else { return }
+        Task(priority: .background) { 
+            let movieResponse: MoviesResponse? = try? await MovieStore.shared.fetchAndDecode(url: url)
+            if let movieResponse = movieResponse {
+                generateSnapshot(with: movieResponse.results)
+                activityIndicator.stopAnimating()
+            }
+        }
+        
     }
     
     private func setupTableView() {
@@ -90,6 +103,7 @@ private extension UITableViewCell {
             configuration.image = UIImage(data: data)
             //configuration.secondaryText = movie.overview
             print("Fetched \(posterURL)")
+            sleep(1)
             DispatchQueue.main.async {
             self?.contentConfiguration = configuration
             }

@@ -79,9 +79,13 @@ final class MovieStore {
         }
     }
     
-    // MARK: - Private funcs
+    func fetchAndDecode<D: Decodable>(url: URL) async throws -> D {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let decodedData = try jsonDecoder.decode(D.self, from: data)
+        return decodedData
+    }
 
-    private func generateURL(with endpoint: Endpoint) -> URL? {
+    func generateURL(with endpoint: Endpoint) -> URL? {
         guard var urlComponents = URLComponents(string: "\(baseAPIURL)/movie/\(endpoint.rawValue)") else {
             return nil
         }
