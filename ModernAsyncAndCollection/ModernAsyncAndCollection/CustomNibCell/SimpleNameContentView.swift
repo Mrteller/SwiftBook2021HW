@@ -14,7 +14,7 @@ class SimpleNameContentView: UIView, UIContentView {
             currentConfiguration
         }
         set {
-            // Make sure the given configuration is of type SFSymbolNameContentConfiguration
+            // Make sure the given configuration is of type SimpleNameContentConfiguration
             guard let newConfiguration = newValue as? SimpleNameContentConfiguration else {
                 return
             }
@@ -28,7 +28,7 @@ class SimpleNameContentView: UIView, UIContentView {
         super.init(frame: .zero)
         
         // 2
-        // Load SFSymbolNameContentView.xib
+        // Load SimpleNameContentView.xib
         loadNib()
         
         // Set name to label
@@ -46,7 +46,7 @@ private extension SimpleNameContentView {
     private func loadNib() {
         
         // 3
-        // Load SFSymbolNameContentView.xib by making self as owner of SFSymbolNameContentView.xib
+        // Load SimpleNameContentView.xib by making self as owner of SimpleNameContentView.xib
         Bundle.main.loadNibNamed("\(SimpleNameContentView.self)", owner: self, options: nil)
         
         // 4

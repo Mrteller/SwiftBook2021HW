@@ -8,23 +8,39 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ModernAsyncAndCollection" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MenuViewController" customModule="ModernAsyncAndCollection" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="m7P-o8-veY">
-                                <rect key="frame" x="124" y="459.5" width="166" height="31"/>
+                                <rect key="frame" x="90" y="428.5" width="234.5" height="93"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eo4-EK-myB">
-                                        <rect key="frame" x="0.0" y="0.0" width="166" height="31"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="234.5" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Regular JSON parsing"/>
                                         <connections>
-                                            <action selector="regularJSONparsingPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="pcC-27-GLM"/>
+                                            <segue destination="zg9-2T-0AT" kind="show" identifier="regularJSONparsing" id="Y9B-hO-YbL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Vc-ds-X2A">
+                                        <rect key="frame" x="0.0" y="31" width="234.5" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Serialized JSON parsing"/>
+                                        <connections>
+                                            <segue destination="zg9-2T-0AT" kind="show" identifier="serializedJSONparsing" id="Y8u-tF-d29"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bx-WH-dwY">
+                                        <rect key="frame" x="0.0" y="62" width="234.5" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Manual Alamorfire JSON parsing"/>
+                                        <connections>
+                                            <segue destination="zg9-2T-0AT" kind="show" identifier="manualAlamorfireJSONparsing" id="alz-5p-kcR"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -38,9 +54,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vww-QC-mPq"/>
-                    <connections>
-                        <segue destination="zg9-2T-0AT" kind="show" identifier="regularJSONparsing" id="ZH2-IO-qd1"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -81,6 +94,9 @@
             <point key="canvasLocation" x="18.840579710144929" y="32.8125"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="alz-5p-kcR"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
