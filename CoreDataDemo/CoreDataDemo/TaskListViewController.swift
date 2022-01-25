@@ -8,13 +8,12 @@
 import UIKit
 
 class TaskListViewController: UITableViewController {
-//    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     enum RowAction {
         case add, edit, delete
     }
-    private let context = StorageManager.shared.persistentContainer.viewContext
     
+    private let context = StorageManager.shared.persistentContainer.viewContext
     private let cellID = "task"
     private var taskList: [Task] = []
     private var indexPathForSelectedRow: IndexPath?
@@ -195,7 +194,7 @@ extension TaskListViewController {
             self?.showAlert(with: "Delete task", and: "Are you sure?", rowAction: .delete)
 
         }
-        delete.backgroundColor =  UIColor.init(red: 225/255, green: 20/255, blue: 0/255, alpha: 1)
+        delete.backgroundColor = .systemGreen
         delete.image = UIImage(systemName: "trash")
   
         
@@ -203,7 +202,7 @@ extension TaskListViewController {
             print("Edit Pressed", action)
             self?.showAlert(with: "Edit task", and: "Enter new description", rowAction: .edit)
         }
-        edit.backgroundColor = UIColor.init(red: 60/255, green: 206/255, blue: 55/255, alpha: 1)
+        edit.backgroundColor = .systemRed
         edit.image = UIImage(systemName: "doc.badge.gearshape")
         
         let config = UISwipeActionsConfiguration(actions: [delete, edit])

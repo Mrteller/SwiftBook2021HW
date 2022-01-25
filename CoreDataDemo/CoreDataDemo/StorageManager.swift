@@ -25,8 +25,6 @@ final class StorageManager {
         return container
     }()
     
-    // MARK: - Private vars
-    
     // MARK: - Initializers
     
     private init() { }
@@ -45,5 +43,5 @@ final class StorageManager {
         }
     }
     
-    // MARK: - Private funcs
+
 }
