@@ -101,9 +101,12 @@ class TaskListViewController: UITableViewController {
         }
 
         saveAction.setValue(UIColor(named: "LabelMainColor") ?? .white, forKey: "titleTextColor")
+        saveAction.setValue(UIImage(systemName: "checkmark"), forKey: "image")
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-
+        cancelAction.setValue(UIColor.systemOrange, forKey: "titleTextColor")
+        cancelAction.setValue(UIImage(systemName: "xmark"), forKey: "image")
+        
         alert.addAction(saveAction)
         alert.addAction(cancelAction)
         if rowAction != .delete {
@@ -113,10 +116,15 @@ class TaskListViewController: UITableViewController {
         }
         // It should respond but it does not. Yet setting the value works.
         // if alert.responds(to: Selector(("attributedTitle"))) {
-            let titleAttributed = NSMutableAttributedString(
-                string: alert.title!,
-                attributes: [.foregroundColor : UIColor(named: "LabelMainColor") ?? .white])
-            alert.setValue(titleAttributed, forKey: "attributedTitle")
+        let titleAttributed = NSMutableAttributedString(
+            string: "\n" + alert.title!,
+            attributes: [.foregroundColor : UIColor(named: "LabelMainColor") ?? .white])
+        let image1Attachment = NSTextAttachment()
+        image1Attachment.image = UIImage(systemName: "rectangle.and.pencil.and.ellipsis")?.withTintColor(.systemOrange, renderingMode: .alwaysTemplate)
+        // image1Attachment.bounds = CGRect(x: 0, y: 0, width: 80, height: 80)
+        let image1String = NSMutableAttributedString(attachment: image1Attachment)
+        image1String.append(titleAttributed)
+        alert.setValue(image1String, forKey: "attributedTitle")
         // }
         // Could not make it work safe way
         // let kp: ReferenceWritableKeyPath<UIAlertController, NSMutableAttributedString> = \.attributedTitle
