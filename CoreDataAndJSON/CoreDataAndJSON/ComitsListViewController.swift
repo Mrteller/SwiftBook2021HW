@@ -247,10 +247,22 @@ class ComitsListViewController: UITableViewController, NSFetchedResultsControlle
     
     // MARK: NSFetchedResultsControllerDelegate
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
+        switch type { // for future implementation
         case .delete:
             // Show alert
-            generateAndApplySnapshot()
+            // Exclude overhead of creating new snapshot when possible
+            var snapshot = diffableDataSource.snapshot()
+            guard let commit = anObject as? Commit else {
+                generateAndApplySnapshot()
+                return
+            }
+            if let section = snapshot.sectionIdentifier(containingItem: commit), snapshot.numberOfItems(inSection: section) == 1 {
+                snapshot.deleteSections([section])
+            }
+            snapshot.deleteItems([commit])
+            
+            diffableDataSource.apply(snapshot, animatingDifferences: true)
+            
         default:
             generateAndApplySnapshot()
         }
@@ -259,7 +271,6 @@ class ComitsListViewController: UITableViewController, NSFetchedResultsControlle
 }
 
 private extension UITableViewCell {
-    // TODO: refactor to unblocking
     func configure(with commit: Commit) {
         var configuration = defaultContentConfiguration()
         configuration.text = commit.message
