@@ -191,7 +191,7 @@ extension TaskListViewController {
             self?.showAlert(with: "Delete task", and: "Are you sure?", rowAction: .delete)
 
         }
-        delete.backgroundColor = .systemGreen
+        delete.backgroundColor = .systemRed
         delete.image = UIImage(systemName: "trash")
   
         
@@ -199,7 +199,7 @@ extension TaskListViewController {
             print("Edit Pressed", action)
             self?.showAlert(with: "Edit task", and: "Enter new description", rowAction: .edit)
         }
-        edit.backgroundColor = .systemRed
+        edit.backgroundColor = .systemGreen
         edit.image = UIImage(systemName: "doc.badge.gearshape")
         
         let config = UISwipeActionsConfiguration(actions: [delete, edit])
