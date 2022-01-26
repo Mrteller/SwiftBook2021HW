@@ -145,37 +145,26 @@ class TaskListViewController: UITableViewController {
     }
         
     private func append(_ taskName: String) {
-        
         let task = Task(context: context)
         task.name = taskName
         taskList.append(task)
-        
         let cellIndex = IndexPath(row: taskList.count - 1, section: 0)
         tableView.insertRows(at: [cellIndex], with: .automatic)
-        
         StorageManager.shared.saveContext()
     }
     
     private func edit(at indexPath: IndexPath, _ taskName: String) {
-        
         let task = taskList[indexPath.row]
         task.name = taskName
         taskList[indexPath.row] = task
-        
         tableView.reloadRows(at: [indexPath], with: .automatic)
-        
         StorageManager.shared.saveContext()
     }
     
     private func delete(at indexPath: IndexPath) {
-        
-        let task = taskList[indexPath.row]
+        let task = taskList.remove(at: indexPath.row)
         context.delete(task)
-        
-        taskList.remove(at: indexPath.row)
-        
         tableView.deleteRows(at: [indexPath], with: .automatic)
-        
         StorageManager.shared.saveContext()
     }
 }
