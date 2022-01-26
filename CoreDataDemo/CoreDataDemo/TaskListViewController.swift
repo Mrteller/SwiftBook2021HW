@@ -15,7 +15,7 @@ class TaskListViewController: UITableViewController {
     
     private let context = StorageManager.shared.persistentContainer.viewContext
     private let cellID = "task"
-    private var taskList: [Task] = []
+
     private var indexPathForSelectedRow: IndexPath?
 
     override func viewDidLoad() {
@@ -26,12 +26,11 @@ class TaskListViewController: UITableViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
         setupNavigationBar()
-        fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchData()
+        StorageManager.shared.fetchData()
         tableView.reloadData()
     }
  
@@ -69,15 +68,7 @@ class TaskListViewController: UITableViewController {
         showAlert(with: "New Task", and: "What do you want to do?", rowAction: .add)
     }
     
-    private func fetchData() {
-        let fetchRequest = Task.fetchRequest()
-        
-        do {
-            taskList = try context.fetch(fetchRequest)
-        } catch {
-           print("Faild to fetch data", error)
-        }
-    }
+
     
     private func showAlert(with title: String, and message: String, rowAction: RowAction) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -86,17 +77,17 @@ class TaskListViewController: UITableViewController {
         case .add:
             saveAction = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
                 guard let task = alert.textFields?.first?.text, !task.isEmpty else { return }
-                self?.append(task)
+                self?.appendTask(task)
             }
         case .edit:
             saveAction = UIAlertAction(title: "Confirm", style: .default) { [weak self] _ in
                 guard let task = alert.textFields?.first?.text, !task.isEmpty, let indexPath = self?.indexPathForSelectedRow else { return }
-                self?.edit(at: indexPath, task)
+                self?.editTask(at: indexPath, task)
             }
         case .delete:
             saveAction = UIAlertAction(title: "Delete", style: .default) { [weak self] _ in
                 guard let indexPath = self?.indexPathForSelectedRow else { return }
-                self?.delete(at: indexPath)
+                self?.deleteTask(at: indexPath)
             }
         }
 
@@ -144,39 +135,31 @@ class TaskListViewController: UITableViewController {
         present(alert, animated: true)
     }
         
-    private func append(_ taskName: String) {
-        let task = Task(context: context)
-        task.name = taskName
-        taskList.append(task)
-        let cellIndex = IndexPath(row: taskList.count - 1, section: 0)
+    private func appendTask(_ taskName: String) {
+        StorageManager.shared.appendTask(taskName)
+        let cellIndex = IndexPath(row: StorageManager.shared.taskList.count - 1, section: 0)
         tableView.insertRows(at: [cellIndex], with: .automatic)
-        StorageManager.shared.saveContext()
     }
     
-    private func edit(at indexPath: IndexPath, _ taskName: String) {
-        let task = taskList[indexPath.row]
-        task.name = taskName
-        taskList[indexPath.row] = task
+    private func editTask(at indexPath: IndexPath, _ taskName: String) {
+        StorageManager.shared.editTask(at: indexPath, taskName)
         tableView.reloadRows(at: [indexPath], with: .automatic)
-        StorageManager.shared.saveContext()
     }
     
-    private func delete(at indexPath: IndexPath) {
-        let task = taskList.remove(at: indexPath.row)
-        context.delete(task)
+    private func deleteTask(at indexPath: IndexPath) {
+        StorageManager.shared.deleteTask(at: indexPath)
         tableView.deleteRows(at: [indexPath], with: .automatic)
-        StorageManager.shared.saveContext()
     }
 }
 
 extension TaskListViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        taskList.count
+        StorageManager.shared.taskList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        let task = taskList[indexPath.row]
+        let task = StorageManager.shared.taskList[indexPath.row]
         
         var content = cell.defaultContentConfiguration()
         content.text = task.name
@@ -187,9 +170,9 @@ extension TaskListViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         indexPathForSelectedRow = indexPath
         let delete = UIContextualAction(style: .destructive, title: "") { [weak self] (action, view, completion) in
-            print("Delete Pressed", action)
+            // print("Delete Pressed", action)
             self?.showAlert(with: "Delete task", and: "Are you sure?", rowAction: .delete)
-
+            completion(true)
         }
         delete.backgroundColor = .systemRed
         delete.image = UIImage(systemName: "trash")
@@ -198,6 +181,7 @@ extension TaskListViewController {
         let edit = UIContextualAction(style: .normal, title: "") { [weak self] (action, view, completion) in
             print("Edit Pressed", action)
             self?.showAlert(with: "Edit task", and: "Enter new description", rowAction: .edit)
+            completion(true)
         }
         edit.backgroundColor = .systemGreen
         edit.image = UIImage(systemName: "doc.badge.gearshape")
@@ -206,5 +190,9 @@ extension TaskListViewController {
         config.performsFirstActionWithFullSwipe = false
         
         return config
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
