@@ -10,7 +10,7 @@ import CoreData
 
 class ComitsListViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    private var diffableDataSource: UITableViewDiffableDataSource<String, Commit>!
+    private var diffableDataSource: StringConvertibleTableViewDiffibleDataSource<String, Commit>!
     private var commitPredicate: NSPredicate?
     private var fetchedResultsController: NSFetchedResultsController<Commit>!
     
@@ -188,8 +188,8 @@ class ComitsListViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     private func setupTableView() {
-        tableView.register(TitleSupplementaryView.self, forHeaderFooterViewReuseIdentifier: "headerID")
-        diffableDataSource = UITableViewDiffableDataSource<String, Commit>(tableView: tableView) { (tableView, indexPath, commit) -> UITableViewCell? in
+//        tableView.register(TitleSupplementaryView.self, forHeaderFooterViewReuseIdentifier: "headerID")
+        diffableDataSource = StringConvertibleTableViewDiffibleDataSource<String, Commit>(tableView: tableView) { (tableView, indexPath, commit) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: "Commit", for: indexPath)
             cell.configure(with: commit)
             return cell
@@ -232,18 +232,19 @@ class ComitsListViewController: UITableViewController, NSFetchedResultsControlle
         return config
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerID") as? TitleSupplementaryView
-        else {
-            return nil
-        }
-        //header.label.text = diffableDataSource.sectionIdentifier(for: section) // works
-        header.label.text = fetchedResultsController.sections?[section].name
-        header.label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
-        header.label.textAlignment = .center
-        return header
-    }
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerID") as? TitleSupplementaryView
+//        else {
+//            return nil
+//        }
+//        //header.label.text = diffableDataSource.sectionIdentifier(for: section) // works
+//        header.label.text = fetchedResultsController.sections?[section].name
+//        header.label.textColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+//        header.label.textAlignment = .center
+//        return header
+//    }
     
+
     
     // MARK: NSFetchedResultsControllerDelegate
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
@@ -277,5 +278,11 @@ private extension UITableViewCell {
         configuration.secondaryText = "By \(commit.author.name) on \(commit.date.description)"
         contentConfiguration = configuration
         
+    }
+}
+
+class StringConvertibleTableViewDiffibleDataSource<UserSection: Hashable, User: Hashable>: UITableViewDiffableDataSource<UserSection, User> where UserSection: CustomStringConvertible{
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionIdentifier(for: section)?.description
     }
 }

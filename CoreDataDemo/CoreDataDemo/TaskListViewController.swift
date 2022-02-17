@@ -60,6 +60,13 @@ class TaskListViewController: UITableViewController {
             action: #selector(addNewTask)
         )
         
+        navigationItem.leftBarButtonItem = editButtonItem
+//        UIBarButtonItem(
+//            barButtonSystemItem: .edit,
+//            target: self,
+//            action: #selector(editTableViewToggle)
+//        )
+        
         navigationController?.navigationBar.tintColor = .white
         
     }
@@ -68,7 +75,9 @@ class TaskListViewController: UITableViewController {
         showAlert(with: "New Task", and: "What do you want to do?", rowAction: .add)
     }
     
-
+//    @objc private func editTableViewToggle() {
+//        tableView.setEditing(!tableView.isEditing, animated: true)
+//    }
     
     private func showAlert(with title: String, and message: String, rowAction: RowAction) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -148,7 +157,28 @@ class TaskListViewController: UITableViewController {
     
     private func deleteTask(at indexPath: IndexPath) {
         StorageManager.shared.deleteTask(at: indexPath)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+// Does not work
+        UIView.animate(withDuration: 10, delay: 0.0, options: .curveEaseInOut) { [weak self] in
+            //self?.tableView.beginUpdates()
+            //self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self?.tableView.reloadData()
+            //self?.tableView.endUpdates()
+        }
+//        UIView.beginAnimations("animation", context: nil)
+//        UIView.setAnimationDuration(6)
+//        CATransaction.begin()
+//        CATransaction.setCompletionBlock({
+//            // completion block
+//        })
+//
+//        tableView.beginUpdates()
+//        tableView.deleteRows(at: [indexPath], with: .automatic)
+//        tableView.endUpdates()
+//
+//        CATransaction.commit()
+//        UIView.commitAnimations()
+        
+ //       tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }
 
@@ -167,32 +197,46 @@ extension TaskListViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        indexPathForSelectedRow = indexPath
-        let delete = UIContextualAction(style: .destructive, title: "") { [weak self] (action, view, completion) in
-            // print("Delete Pressed", action)
-            self?.showAlert(with: "Delete task", and: "Are you sure?", rowAction: .delete)
-            completion(true)
-        }
-        delete.backgroundColor = .systemRed
-        delete.image = UIImage(systemName: "trash")
-  
-        
-        let edit = UIContextualAction(style: .normal, title: "") { [weak self] (action, view, completion) in
-            print("Edit Pressed", action)
-            self?.showAlert(with: "Edit task", and: "Enter new description", rowAction: .edit)
-            completion(true)
-        }
-        edit.backgroundColor = .systemGreen
-        edit.image = UIImage(systemName: "doc.badge.gearshape")
-        
-        let config = UISwipeActionsConfiguration(actions: [delete, edit])
-        config.performsFirstActionWithFullSwipe = false
-        
-        return config
-    }
+//    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        indexPathForSelectedRow = indexPath
+//        let delete = UIContextualAction(style: .destructive, title: "") { [weak self] (action, view, completion) in
+//            // print("Delete Pressed", action)
+//            self?.showAlert(with: "Delete task", and: "Are you sure?", rowAction: .delete)
+//            completion(true)
+//        }
+//        delete.backgroundColor = .systemRed
+//        delete.image = UIImage(systemName: "trash")
+//
+//
+//        let edit = UIContextualAction(style: .normal, title: "") { [weak self] (action, view, completion) in
+//            print("Edit Pressed", action)
+//            self?.showAlert(with: "Edit task", and: "Enter new description", rowAction: .edit)
+//            completion(true)
+//        }
+//        edit.backgroundColor = .systemGreen
+//        edit.image = UIImage(systemName: "doc.badge.gearshape")
+//
+//        let config = UISwipeActionsConfiguration(actions: [delete, edit])
+//        config.performsFirstActionWithFullSwipe = false
+//
+//        return config
+//    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            deleteTask(at: indexPath)
+        default:
+            break
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        "Delete"
+    }
+
 }

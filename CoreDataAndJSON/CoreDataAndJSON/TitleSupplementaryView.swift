@@ -26,6 +26,9 @@ extension TitleSupplementaryView {
         label.adjustsFontForContentSizeCategory = true
         label.frame = bounds
         label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        // We should add not to the view itself but to content view. And do it before setting constraints.
+        contentView.addSubview(label)
 //        let inset = CGFloat(10)
 //        NSLayoutConstraint.activate([
 //            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
@@ -33,7 +36,5 @@ extension TitleSupplementaryView {
 //            label.topAnchor.constraint(equalTo: topAnchor, constant: inset),
 //            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset)
 //        ])
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        addSubview(label)
     }
 }
