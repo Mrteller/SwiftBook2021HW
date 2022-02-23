@@ -53,29 +53,40 @@ struct RegisterView: View {
                 prompt: "Enter your password...")
                 .padding(.bottom)
             Button(action: registerUser) {
-                Label("Ok", systemImage: "checkmark.circle")
-                
+                Label("Ok", systemImage: "checkmark.circle.fill")
+            }
+            Button(action: logoutUser) {
+                Label("Logout", systemImage: "rectangle.portrait.and.arrow.right.fill")
             }
         }
+        .padding(.horizontal)
     }
 }
 
 extension RegisterView {
+    
     private func registerUser() {
         if !name.isEmpty {
             user.name = name
-            user.isRegister.toggle()
+            //user.isRegister.toggle()
         }
     }
+    
+    private func logoutUser() {
+            user.name = ""
+    }
+    
     private func isValidName(_ name: String) -> Bool {
        let nameRegex = "^\\w{3,18}$"
        let validateNamePredicate = NSPredicate(format: "SELF MATCHES %@", nameRegex)
        return validateNamePredicate.evaluate(with: name)
     }
+    
     private func isValidPassword<R: RangeExpression>(_ name: String, lengthRange: R) -> Bool where R.Bound == Int {
         guard  lengthRange ~= name.count else { return false }
         return name.allSatisfy{ $0.isASCII }
     }
+    
 }
 
 struct RegisterView_Previews: PreviewProvider {
