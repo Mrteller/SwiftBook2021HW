@@ -28,6 +28,7 @@ struct AdaptiveStackWithEqualDistribution<S: ShapeStyle>: View {
             }
         }
     }
+    
     private var equalWidthTexts: some View {
         Group {
             TextField(prompt, text: $text)
@@ -54,7 +55,6 @@ struct AdaptiveStackWithEqualDistribution<S: ShapeStyle>: View {
 
 
 struct AdaptiveStackWithEqualDistribution_Previews: PreviewProvider {
-
     static var previews: some View {
         let gradient = LinearGradient(colors: [.red, .purple], startPoint: .leading, endPoint: .bottomTrailing)
         AdaptiveStackWithEqualDistribution(text: .constant("Name"), value: "Value", valueShapeStyle: Color.green, prompt: "Enter your name...")
