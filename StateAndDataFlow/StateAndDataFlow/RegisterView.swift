@@ -52,11 +52,8 @@ struct RegisterView: View {
                         .linearGradient(colors: [.red, .purple], startPoint: .top, endPoint: .bottom),
                 prompt: "Enter your password...")
                 .padding(.bottom)
-            Button(action: registerUser) {
+            Button(action: { user.setUsernameTo(name)}) {
                 Label("Ok", systemImage: "checkmark.circle.fill")
-            }
-            Button(action: logoutUser) {
-                Label("Logout", systemImage: "rectangle.portrait.and.arrow.right.fill")
             }
         }
         .padding(.horizontal)
@@ -64,17 +61,6 @@ struct RegisterView: View {
 }
 
 extension RegisterView {
-    
-    private func registerUser() {
-        if !name.isEmpty {
-            user.name = name
-            //user.isRegister.toggle()
-        }
-    }
-    
-    private func logoutUser() {
-            user.name = ""
-    }
     
     private func isValidName(_ name: String) -> Bool {
        let nameRegex = "^\\w{3,18}$"

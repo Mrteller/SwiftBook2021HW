@@ -20,9 +20,28 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .offset(x: 0, y: 100)
             Spacer()
-            ButtonView(timer: timer)
+            Button(action: timer.startTimer) {
+                Text("\(timer.buttonTitle)")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+            }
+            .button(backgroundFill: .red)
+            Spacer()
+            Button(action: user.logout) {
+                Text("Logout")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+            }
+            .button(backgroundFill: .blue)
+
+//            Button(action: user.logout) {
+//                Label("Logout", systemImage: "rectangle.portrait.and.arrow.right.fill")
+//            }
             Spacer()
         }
+        .padding()
     }
 }
 
@@ -32,22 +51,44 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct ButtonView: View {
-    @ObservedObject var timer: TimeCounter
-    
-    var body: some View {
-        Button(action: timer.startTimer) {
-            Text("\(timer.buttonTitle)")
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-        }
-        .frame(width: 200, height: 60)
-        .background(Color.red)
-        .cornerRadius(20)
-        .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.black, lineWidth: 4)
-        )
+//struct ButtonView: View {
+//    @ObservedObject var timer: TimeCounter
+//
+//    var body: some View {
+//        Button(action: timer.startTimer) {
+//            Text("\(timer.buttonTitle)")
+//                .font(.title)
+//                .fontWeight(.bold)
+//                .foregroundColor(.white)
+//        }
+//        .button(backgroundFill: .red)
+//
+//        Button(action: user.logout) {
+//            Text("Logout")
+//                .font(.title)
+//                .fontWeight(.bold)
+//                .foregroundColor(.white)
+//        }
+//        .button(backgroundFill: .blue)
+//    }
+//}
+
+struct ButtonModifier<S: ShapeStyle>: ViewModifier {
+    let valueShapeStyle: S
+    func body(content: Content) -> some View {
+        content
+            .frame(width: 200, height: 60)
+            .background(valueShapeStyle)
+            .cornerRadius(20)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.black, lineWidth: 4)
+            )
+    }
+}
+
+extension View {
+    func button<S: ShapeStyle>(backgroundFill: S) -> some View {
+        self.modifier(ButtonModifier(valueShapeStyle: backgroundFill))
     }
 }
