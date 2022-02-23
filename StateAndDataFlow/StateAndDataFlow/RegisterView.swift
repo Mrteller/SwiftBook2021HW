@@ -55,6 +55,7 @@ struct RegisterView: View {
             Button(action: { user.setUsernameTo(name)}) {
                 Label("Ok", systemImage: "checkmark.circle.fill")
             }
+            .disabled(!isValidName(name))
         }
         .padding(.horizontal)
     }
