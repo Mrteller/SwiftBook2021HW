@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct SwiftUIListsAndNavigationApp: App {
+    @StateObject private var personManager = PersonManager()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(personManager)
         }
     }
 }

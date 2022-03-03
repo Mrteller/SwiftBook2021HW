@@ -9,13 +9,22 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        TabView {
+            NameList()
+                .tabItem {
+                    Label("Persons", systemImage: "person.3.fill")
+                }
+            ContactList()
+                .tabItem {
+                    Label("Numbers", systemImage: "phone.fill")
+                }
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(PersonManager())
     }
 }

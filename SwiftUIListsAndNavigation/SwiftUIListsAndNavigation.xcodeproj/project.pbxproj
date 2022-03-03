@@ -11,6 +11,11 @@
 		DACB995727CFCD2000B8623A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB995627CFCD2000B8623A /* ContentView.swift */; };
 		DACB995927CFCD2300B8623A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DACB995827CFCD2300B8623A /* Assets.xcassets */; };
 		DACB995C27CFCD2300B8623A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DACB995B27CFCD2300B8623A /* Preview Assets.xcassets */; };
+		DACB996527CFD0F800B8623A /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB996327CFD0F800B8623A /* Person.swift */; };
+		DACB996627CFD0F800B8623A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB996427CFD0F800B8623A /* DataManager.swift */; };
+		DACB996A27D0B5BA00B8623A /* PersonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB996927D0B5BA00B8623A /* PersonManager.swift */; };
+		DACB996C27D0E16900B8623A /* NameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB996B27D0E16900B8623A /* NameList.swift */; };
+		DACB996E27D10A0A00B8623A /* ContactList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACB996D27D10A0A00B8623A /* ContactList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		DACB995627CFCD2000B8623A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DACB995827CFCD2300B8623A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DACB995B27CFCD2300B8623A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DACB996327CFD0F800B8623A /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		DACB996427CFD0F800B8623A /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		DACB996927D0B5BA00B8623A /* PersonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonManager.swift; sourceTree = "<group>"; };
+		DACB996B27D0E16900B8623A /* NameList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameList.swift; sourceTree = "<group>"; };
+		DACB996D27D10A0A00B8623A /* ContactList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +61,11 @@
 		DACB995327CFCD2000B8623A /* SwiftUIListsAndNavigation */ = {
 			isa = PBXGroup;
 			children = (
+				DACB996227CFD0F800B8623A /* Model */,
 				DACB995427CFCD2000B8623A /* SwiftUIListsAndNavigationApp.swift */,
 				DACB995627CFCD2000B8623A /* ContentView.swift */,
+				DACB996B27D0E16900B8623A /* NameList.swift */,
+				DACB996D27D10A0A00B8623A /* ContactList.swift */,
 				DACB995827CFCD2300B8623A /* Assets.xcassets */,
 				DACB995A27CFCD2300B8623A /* Preview Content */,
 			);
@@ -65,6 +78,17 @@
 				DACB995B27CFCD2300B8623A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DACB996227CFD0F800B8623A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DACB996327CFD0F800B8623A /* Person.swift */,
+				DACB996427CFD0F800B8623A /* DataManager.swift */,
+				DACB996927D0B5BA00B8623A /* PersonManager.swift */,
+			);
+			name = Model;
+			path = ../../ContactsTableView/ContactsTableView/Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +161,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DACB996C27D0E16900B8623A /* NameList.swift in Sources */,
+				DACB996527CFD0F800B8623A /* Person.swift in Sources */,
+				DACB996627CFD0F800B8623A /* DataManager.swift in Sources */,
 				DACB995727CFCD2000B8623A /* ContentView.swift in Sources */,
+				DACB996E27D10A0A00B8623A /* ContactList.swift in Sources */,
+				DACB996A27D0B5BA00B8623A /* PersonManager.swift in Sources */,
 				DACB995527CFCD2000B8623A /* SwiftUIListsAndNavigationApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

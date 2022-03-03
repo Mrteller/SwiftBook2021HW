@@ -5,7 +5,10 @@
 //  Created by  Paul on 28.12.2021.
 //
 
-struct Person {
+import Foundation
+
+struct Person: Identifiable {
+    let id = UUID()
     
     var name: String
     var surname: String
