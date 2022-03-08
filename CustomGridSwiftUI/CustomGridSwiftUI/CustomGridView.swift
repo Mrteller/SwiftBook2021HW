@@ -40,8 +40,8 @@ struct CustomGridView<Content, T>: View where Content : View {
             }
             
         }
-        
     }
+    
     private func indexFor(row: Int, column: Int) -> Int? {
         let index = row * columns + column
         return index < items.count ? index : nil
