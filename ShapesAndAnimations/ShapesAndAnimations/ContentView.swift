@@ -73,10 +73,6 @@ extension HorizontalAlignment {
     
 }
 
-extension Alignment {
-    static let t = Alignment(horizontal: .sliderLeading, vertical: .center)
-}
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
