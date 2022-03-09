@@ -20,8 +20,6 @@ struct ContentView: View {
                         .rotationEffect(.degrees(showAward ? 0 : 180))
                 }
             }
-            
-            Spacer()
             if showAward {
                 AwardsView()
                     .transition(.transition)

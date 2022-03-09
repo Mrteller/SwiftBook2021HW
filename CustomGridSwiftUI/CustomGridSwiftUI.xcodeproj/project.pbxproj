@@ -18,6 +18,7 @@
 		DA4897C227D76D9F00B9A0A4 /* CustomGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4897C127D76D9E00B9A0A4 /* CustomGridView.swift */; };
 		DA4897C427D76FB200B9A0A4 /* AwardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4897C327D76FB200B9A0A4 /* AwardsView.swift */; };
 		DA4897C627D7703B00B9A0A4 /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4897C527D7703B00B9A0A4 /* Award.swift */; };
+		DAEB181027D8AFF2005E981A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEB180F27D8AFF2005E981A /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		DA4897C127D76D9E00B9A0A4 /* CustomGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGridView.swift; sourceTree = "<group>"; };
 		DA4897C327D76FB200B9A0A4 /* AwardsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwardsView.swift; sourceTree = "<group>"; };
 		DA4897C527D7703B00B9A0A4 /* Award.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
+		DAEB180F27D8AFF2005E981A /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				DA4897AA27D7675500B9A0A4 /* ContentView.swift */,
 				DA4897C327D76FB200B9A0A4 /* AwardsView.swift */,
 				DA4897C127D76D9E00B9A0A4 /* CustomGridView.swift */,
+				DAEB180F27D8AFF2005E981A /* Settings.swift */,
 				DA4897B827D76D7600B9A0A4 /* Awards */,
 				DA4897C727D7704F00B9A0A4 /* Model */,
 				DA4897AC27D7675700B9A0A4 /* Assets.xcassets */,
@@ -178,6 +181,7 @@
 				DA4897C627D7703B00B9A0A4 /* Award.swift in Sources */,
 				DA4897BF27D76D7600B9A0A4 /* CurvesView.swift in Sources */,
 				DA4897BD27D76D7600B9A0A4 /* GradientRectangles.swift in Sources */,
+				DAEB181027D8AFF2005E981A /* Settings.swift in Sources */,
 				DA4897C027D76D7600B9A0A4 /* PathView.swift in Sources */,
 				DA4897AB27D7675500B9A0A4 /* ContentView.swift in Sources */,
 				DA4897C227D76D9F00B9A0A4 /* CustomGridView.swift in Sources */,

@@ -13,18 +13,25 @@ struct AwardsView: View {
     var activeAwards: [Award] {
         awards.filter { $0.awarded }
     }
+    
+    @State private var spacing: Float = 10
+    @State private var itemWidth: Float = 0.8
+    @State private var alignmentIndex: Int = 0
+    
+    private let alignments: [HorizontalAlignment] = [.leading, .center, .trailing]
     var body: some View {
         NavigationView {
-            CustomGridView(columns: 2, items: activeAwards) { itemSize, award in
+            CustomGridView(columns: 2, items: activeAwards, alignment: alignments[alignmentIndex], spacing: CGFloat(spacing)) { itemSize, award in
                 VStack {
                     award.awardView
                     Text(award.title)
                 }
-                .frame(width: itemSize.width * 0.8, height: itemSize.height)
+                .frame(width: itemSize.width * CGFloat(itemWidth), height: itemSize.height)
                 .border(.gray, width: 2)
             }
             .navigationBarTitle("Awards")
         }
+        .overlay(Settings(spacing: $spacing, itemWidth: $itemWidth, alignmentIndex: $alignmentIndex), alignment: .bottom)
     }
 }
 

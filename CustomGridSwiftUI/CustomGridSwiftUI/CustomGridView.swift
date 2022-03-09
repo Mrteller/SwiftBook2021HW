@@ -10,7 +10,8 @@ import SwiftUI
 struct CustomGridView<Content, T>: View where Content : View {
     let columns: Int
     let items: [T]
-    let spacing: CGFloat = 10.0
+    let alignment: HorizontalAlignment
+    let spacing: CGFloat
     let content: (_ itemSize: CGSize, _ item: T) -> Content
     
     var rows: Int {
@@ -22,9 +23,9 @@ struct CustomGridView<Content, T>: View where Content : View {
             // Avoid negative values
             let sideSize = max((geometry.size.width - spacing * CGFloat(columns - 1)) / CGFloat(columns), 0)
             HStack{
-                Spacer()
+                Spacer(minLength: 0)
                 ScrollView {
-                    VStack(spacing: spacing) {
+                    VStack(alignment: alignment, spacing: spacing) {
                         ForEach(0...rows, id: \.self) { rowIndex in
                             HStack(spacing: spacing) {
                                 ForEach(0..<columns) { columnIndex in
@@ -40,7 +41,7 @@ struct CustomGridView<Content, T>: View where Content : View {
                         }
                     }
                 }
-                Spacer()
+                Spacer(minLength: 0)
             }
         }
     }
@@ -54,9 +55,9 @@ struct CustomGridView<Content, T>: View where Content : View {
 
 struct CustomGridView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomGridView(columns: 3, items: [11, 3, 4, 7, 76, 2, 1]) { itemSize, item in
+        CustomGridView(columns: 3, items: [11, 3, 4, 7, 76, 2, 1], alignment: .center, spacing: 10) { itemSize, item in
             Text("\(item)")
-                .frame(width: itemSize.width * 0.5, height: itemSize.height)
+                .frame(width: itemSize.width, height: itemSize.height)
                 .border(.gray, width: 2)
         }
     }
