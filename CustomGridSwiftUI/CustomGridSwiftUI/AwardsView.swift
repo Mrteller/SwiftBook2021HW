@@ -20,8 +20,7 @@ struct AwardsView: View {
                     award.awardView
                     Text(award.title)
                 }
-                //.aspectRatio(itemSize.width / itemSize.height, contentMode: .fit)
-                .frame(width: itemSize.width, height: itemSize.height)
+                .frame(width: itemSize.width * 0.8, height: itemSize.height)
                 .border(.gray, width: 2)
             }
             .navigationBarTitle("Awards")
